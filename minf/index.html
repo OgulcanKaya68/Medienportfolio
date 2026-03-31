@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MINF – Medieninformatik | Ogulcan Kaya</title>
+  <link rel="icon" type="image/jpeg" href="../assets/kaya.jpg" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    /* Fach-Header */
+    .fach-hero {
+      padding: calc(var(--nav-h) + 5rem) var(--pad-x) 0;
+      position: relative; overflow: hidden;
+    }
+    .fach-hero::before {
+      content: 'MINF';
+      position: absolute; right: var(--pad-x); top: 50%;
+      transform: translateY(-30%);
+      font-family: var(--condensed);
+      font-size: clamp(6rem, 14vw, 14rem);
+      letter-spacing: 0.04em; color: rgba(0,0,0,0.04);
+      pointer-events: none; user-select: none; line-height: 1;
+    }
+    .fach-eyebrow { display: inline-flex; align-items: center; gap: .5rem; font-family: var(--mono); font-size: .65rem; letter-spacing: .18em; text-transform: uppercase; color: var(--orange); margin-bottom: 1rem; }
+    .fach-eyebrow::before { content: ''; width: 18px; height: 1px; background: var(--orange); }
+    .fach-h1 { font-family: var(--condensed); font-size: clamp(4rem, 10vw, 9rem); line-height: .88; letter-spacing: .04em; color: var(--dark); margin-bottom: .75rem; position: relative; z-index: 1; }
+    .fach-desc { font-family: var(--mono); font-size: .8rem; line-height: 1.8; color: #666; max-width: 500px; margin-bottom: 3rem; position: relative; z-index: 1; }
+    .fach-accent { width: 48px; height: 3px; background: linear-gradient(90deg, var(--blue), var(--orange)); margin-bottom: 3.5rem; }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav" id="site-nav">
+  <a href="../index.html" class="nav-logo">ogulcan.<span>kaya</span></a>
+  <ul class="nav-menu" id="nav-menu">
+    <li class="nav-item"><a href="../index.html" class="nav-link">Start</a></li>
+    <li class="nav-item has-sub"><a href="../koea/index.html" class="nav-link">KOEA</a><div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="../koea/4-klasse.html">4. Klasse</a><a href="../koea/5-klasse.html">5. Klasse</a></div></li>
+    <li class="nav-item has-sub"><a href="../minf/index.html" class="nav-link active">MINF</a><div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="../minf/1-klasse.html">1. Klasse</a><a href="../minf/2-klasse.html">2. Klasse</a><a href="../minf/3-klasse.html">3. Klasse</a><a href="../minf/4-klasse.html">4. Klasse</a></div></li>
+    <li class="nav-item has-sub"><a href="../imsk/index.html" class="nav-link">IMSK</a><div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="../imsk/2-klasse.html">2. Klasse</a><a href="../imsk/3-klasse.html">3. Klasse</a></div></li>
+    <li class="nav-item has-sub"><a href="../wop/index.html" class="nav-link">WOP</a><div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="../wop/3-klasse.html">3. Klasse</a><a href="../wop/4-klasse.html">4. Klasse</a><a href="../wop/5-klasse.html">5. Klasse</a></div></li>
+    <li class="nav-item has-sub"><a href="../ntma/index.html" class="nav-link">NTMA</a><div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="../ntma/3-klasse.html">3. Klasse</a><a href="../ntma/4-klasse.html">4. Klasse</a></div></li>
+    <li class="nav-item"><a href="../lebenslauf.html" class="nav-link">Lebenslauf</a></li>
+    <li class="nav-item"><a href="../ueber-mich.html" class="nav-link">Über mich</a></li>
+    <li class="nav-item"><a href="../kontakt.html" class="nav-link">Kontakt</a></li>
+  </ul>
+  <button class="nav-toggle" id="nav-toggle"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="fach-hero">
+  <div class="fach-eyebrow">Fachbereich · 1. bis 4. Klasse</div>
+  <h1 class="fach-h1">MINF</h1>
+  <p class="fach-desc">Medieninformatik — 1. bis 4. Klasse.</p>
+  <div class="fach-accent"></div>
+</div>
+
+<div class="tabs-bar">
+  <button class="tab-btn active" data-tab="kl1">1. Klasse</button><button class="tab-btn" data-tab="kl2">2. Klasse</button><button class="tab-btn" data-tab="kl3">3. Klasse</button><button class="tab-btn" data-tab="kl4">4. Klasse</button>
+</div>
+
+<div class="tab-panel active" id="tab-kl1">
+  <div class="cards-grid">
+    <a href="#" class="proj-card">
+      <div class="card-thumb"><div class="card-thumb-placeholder">MINF</div><span class="card-badge">MINF · 1. Klasse</span></div>
+      <div class="card-body"><span class="card-klasse">1. Klasse</span><h3 class="card-title">Projektname kommt hier</h3><p class="card-desc">Kurzbeschreibung des Projekts — Aufgabenstellung und Ergebnis.</p><span class="card-arrow">Mehr lesen →</span></div>
+    </a>
+  </div>
+</div><div class="tab-panel" id="tab-kl2">
+  <div class="cards-grid">
+    <a href="#" class="proj-card">
+      <div class="card-thumb"><div class="card-thumb-placeholder">MINF</div><span class="card-badge">MINF · 2. Klasse</span></div>
+      <div class="card-body"><span class="card-klasse">2. Klasse</span><h3 class="card-title">Projektname kommt hier</h3><p class="card-desc">Kurzbeschreibung des Projekts — Aufgabenstellung und Ergebnis.</p><span class="card-arrow">Mehr lesen →</span></div>
+    </a>
+  </div>
+</div><div class="tab-panel" id="tab-kl3">
+  <div class="cards-grid">
+    <a href="#" class="proj-card">
+      <div class="card-thumb"><div class="card-thumb-placeholder">MINF</div><span class="card-badge">MINF · 3. Klasse</span></div>
+      <div class="card-body"><span class="card-klasse">3. Klasse</span><h3 class="card-title">Projektname kommt hier</h3><p class="card-desc">Kurzbeschreibung des Projekts — Aufgabenstellung und Ergebnis.</p><span class="card-arrow">Mehr lesen →</span></div>
+    </a>
+  </div>
+</div><div class="tab-panel" id="tab-kl4">
+  <div class="cards-grid">
+    <a href="#" class="proj-card">
+      <div class="card-thumb"><div class="card-thumb-placeholder">MINF</div><span class="card-badge">MINF · 4. Klasse</span></div>
+      <div class="card-body"><span class="card-klasse">4. Klasse</span><h3 class="card-title">Projektname kommt hier</h3><p class="card-desc">Kurzbeschreibung des Projekts — Aufgabenstellung und Ergebnis.</p><span class="card-arrow">Mehr lesen →</span></div>
+    </a>
+  </div>
+</div>
+
+<footer class="site-footer" style="margin-top:5rem;">
+  <div class="footer-name">Ogulcan <span>Kaya</span></div>
+  <div class="footer-right">Media HAK Schwaz<br>Kommunikations- &amp; Medienportfolio</div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>document.getElementById('nav-toggle').addEventListener('click',function(){document.getElementById('nav-menu').classList.toggle('open');});</script>
+</body>
+</html>

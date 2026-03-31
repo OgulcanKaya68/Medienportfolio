@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Über mich – Ogulcan Kaya</title>
+  <link rel="icon" type="image/jpeg" href="assets/kaya.jpg" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .about-page { max-width: 1100px; margin: 0 auto; padding: calc(var(--nav-h) + 5rem) var(--pad-x) 6rem; }
+
+    /* Header */
+    .about-tag { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--orange); margin-bottom: 1.2rem; }
+    .about-tag::before { content: ''; width: 22px; height: 1px; background: var(--orange); }
+    .about-h1 { font-family: var(--condensed); font-size: clamp(3.5rem, 7vw, 6.5rem); letter-spacing: 0.03em; color: var(--dark); line-height: 0.9; margin-bottom: 3.5rem; }
+    .about-h1 span { color: var(--orange); }
+
+    /* Two-col layout */
+    .about-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 6rem; align-items: start; margin-bottom: 5rem; }
+
+    /* Text */
+    .about-text p { font-family: var(--mono); font-size: 0.84rem; line-height: 1.95; color: #444; margin-bottom: 1.5rem; }
+    .about-text p:last-child { margin-bottom: 0; }
+    .about-text strong { color: var(--dark); font-weight: 500; }
+    .about-text .highlight { color: var(--orange); font-weight: 500; }
+
+    /* Right side info cards */
+    .about-aside { display: flex; flex-direction: column; gap: 0; }
+    .info-card { padding: 1.5rem 0; border-bottom: 1px solid var(--border); }
+    .info-card:first-child { border-top: 1px solid var(--border); }
+    .info-card-label { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
+    .info-card-val { font-family: var(--display); font-size: 0.95rem; font-weight: 700; color: var(--dark); }
+    .info-card-sub { font-family: var(--mono); font-size: 0.72rem; color: #666; margin-top: 0.2rem; line-height: 1.5; }
+
+    /* Status badge */
+    .status-badge { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.9rem 1.5rem; background: var(--dark); margin-bottom: 3rem; }
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; animation: pulse 2s infinite; }
+    .status-text { font-family: var(--mono); font-size: 0.72rem; color: rgba(255,255,255,0.7); }
+    .status-text strong { color: #fff; }
+
+    /* Values Grid */
+    .values-label { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--orange); margin-bottom: 2rem; display: flex; align-items: center; gap: 0.8rem; }
+    .values-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; background: var(--border); }
+    .value-card { background: var(--cream); padding: 2rem 1.75rem; transition: background 0.2s; }
+    .value-card:hover { background: var(--cream-dark); }
+    .value-icon { font-family: var(--condensed); font-size: 2rem; letter-spacing: 0.04em; color: var(--dark); margin-bottom: 0.75rem; line-height: 1; }
+    .value-title { font-family: var(--display); font-size: 0.9rem; font-weight: 700; color: var(--dark); margin-bottom: 0.5rem; }
+    .value-desc { font-family: var(--mono); font-size: 0.7rem; line-height: 1.7; color: #666; }
+
+    .about-cta { display: flex; gap: 1rem; margin-top: 3rem; }
+
+    @media (max-width: 960px) {
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .values-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav" id="site-nav">
+  <a href="index.html" class="nav-logo">ogulcan.<span>kaya</span></a>
+  <ul class="nav-menu" id="nav-menu">
+    <li class="nav-item"><a href="index.html" class="nav-link">Start</a></li>
+    <li class="nav-item has-sub">
+      <a href="koea/index.html" class="nav-link">KOEA</a>
+      <div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="koea/4-klasse.html">4. Klasse</a><a href="koea/5-klasse.html">5. Klasse</a></div>
+    </li>
+    <li class="nav-item has-sub">
+      <a href="minf/index.html" class="nav-link">MINF</a>
+      <div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="minf/1-klasse.html">1. Klasse</a><a href="minf/2-klasse.html">2. Klasse</a><a href="minf/3-klasse.html">3. Klasse</a><a href="minf/4-klasse.html">4. Klasse</a></div>
+    </li>
+    <li class="nav-item has-sub">
+      <a href="imsk/index.html" class="nav-link">IMSK</a>
+      <div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="imsk/2-klasse.html">2. Klasse</a><a href="imsk/3-klasse.html">3. Klasse</a></div>
+    </li>
+    <li class="nav-item has-sub">
+      <a href="wop/index.html" class="nav-link">WOP</a>
+      <div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="wop/3-klasse.html">3. Klasse</a><a href="wop/4-klasse.html">4. Klasse</a><a href="wop/5-klasse.html">5. Klasse</a></div>
+    </li>
+    <li class="nav-item has-sub">
+      <a href="ntma/index.html" class="nav-link">NTMA</a>
+      <div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="ntma/3-klasse.html">3. Klasse</a><a href="ntma/4-klasse.html">4. Klasse</a></div>
+    </li>
+    <li class="nav-item"><a href="lebenslauf.html" class="nav-link">Lebenslauf</a></li>
+    <li class="nav-item"><a href="ueber-mich.html" class="nav-link active">Über mich</a></li>
+    <li class="nav-item"><a href="kontakt.html" class="nav-link">Kontakt</a></li>
+  </ul>
+  <button class="nav-toggle" id="nav-toggle"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="about-page">
+
+  <div class="about-tag">Über mich</div>
+  <h1 class="about-h1">Ogulcan<br><span>Kaya</span></h1>
+
+  <div class="status-badge">
+    <span class="status-dot"></span>
+    <span class="status-text"><strong>Offen für Praktika &amp; Einstiegsjobs</strong> im Bereich Web- &amp; Softwareentwicklung</span>
+  </div>
+
+  <div class="about-grid">
+
+    <div class="about-text">
+      <p>
+        Ich bin Ogulcan Kaya, Schüler im fünften Jahrgang der <strong>Media HAK Schwaz</strong> — einer kaufmännischen Handelsakademie mit Schwerpunkt auf Kommunikation, Medieninformatik und digitalen Technologien. Seit ich das erste Mal eine Webseite im Browser inspiziert und den dahinterliegenden Code gesehen habe, war mir klar: Das ist mein Feld.
+      </p>
+      <p>
+        Mein Schulzweig war <span class="highlight">Medieninformatik</span> — mit Fokus auf Adobe-Programme, digitale Mediengestaltung, Web-Entwicklung und Kommunikation. Parallel dazu habe ich selbstständig programmiert, Webprojekte gebaut und mich tief in JavaScript, PHP und Datenbankanbindungen eingearbeitet. Dort, wo Logik auf Kreativität trifft, bin ich in meinem Element.
+      </p>
+      <p>
+        In fünf Jahren HAK habe ich eine breite Basis aufgebaut: Mediengestaltung, Netzwerktechnik, CMS-Entwicklung mit WordPress, kaufmännisches Denken und Kommunikation. Mein <strong>Diplomarbeitsprojekt „Charity"</strong> war dabei ein besonderer Meilenstein — ein echtes Webprojekt von der Konzeption bis zur Live-Schaltung, das technisches Können mit gesellschaftlicher Relevanz verbindet.
+      </p>
+      <p>
+        Mein <span class="highlight">persönliches Ziel ist es, in der Web- und Softwareentwicklung zu arbeiten</span>. Ich bin aktuell auf der Suche nach einem Praktikum oder Einstiegsjob, in dem ich diesen Weg weitergehen kann — motiviert, lernbereit und offen für neue Technologien und Herausforderungen.
+      </p>
+      <div class="about-cta">
+        <a href="kontakt.html" class="btn btn-primary">Kontakt aufnehmen</a>
+        <a href="lebenslauf.html" class="btn btn-secondary">Lebenslauf ansehen</a>
+      </div>
+    </div>
+
+    <div class="about-aside">
+    <!-- Foto -->
+    <div style="margin-bottom:2rem;">
+      <div style="position:relative;width:100%;">
+        <img src="assets/kaya.jpg" alt="Ogulcan Kaya" style="width:100%;display:block;object-fit:cover;object-position:center top;aspect-ratio:4/5;" />
+        <div style="position:absolute;top:-10px;right:-10px;width:50px;height:50px;border-top:3px solid var(--orange);border-right:3px solid var(--orange);"></div>
+        <div style="position:absolute;bottom:-10px;left:-10px;width:50px;height:50px;border-bottom:3px solid var(--blue);border-left:3px solid var(--blue);"></div>
+      </div>
+    </div>
+
+
+      <div class="info-card">
+        <div class="info-card-label">Schule</div>
+        <div class="info-card-val">Media HAK Schwaz</div>
+        <div class="info-card-sub">BHAK/BHAS Schwaz · Tirol, Österreich</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Jahrgang</div>
+        <div class="info-card-val">5. Klasse · 2025/26</div>
+        <div class="info-card-sub">Abschluss: 2026</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Schwerpunkt</div>
+        <div class="info-card-val">Medieninformatik</div>
+        <div class="info-card-sub">Adobe CC · Mediengestaltung · Kommunikation &amp; IT</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Sprachen</div>
+        <div class="info-card-val">DE · TR · EN</div>
+        <div class="info-card-sub">Deutsch &amp; Türkisch (Muttersprache) · Englisch (B2)</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Diplomarbeit</div>
+        <div class="info-card-val">Charity-Projekt</div>
+        <div class="info-card-sub"><a href="https://charity.ogulcan.kaya.pages.hak-schwaz.at" target="_blank" rel="noopener" style="color:var(--orange);text-decoration:none;">charity.ogulcan.kaya.pages.hak-schwaz.at ↗</a></div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Status</div>
+        <div class="info-card-val" style="color:var(--orange);">Offen für Angebote</div>
+        <div class="info-card-sub">Praktikum · Werkstudent · Einstieg ab 2026</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Values -->
+  <div class="values-label">// Was mich antreibt</div>
+  <div class="values-grid">
+    <div class="value-card">
+      <div class="value-icon">01</div>
+      <div class="value-title">Sauberer Code</div>
+      <div class="value-desc">Ich schreibe Code, der lesbar, wartbar und verständlich ist — nicht nur für Maschinen, sondern für Menschen.</div>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">02</div>
+      <div class="value-title">Immer lernen</div>
+      <div class="value-desc">Technologie entwickelt sich schnell. Ich halte Schritt — neugierig, offen und bereit, mich in neue Themen einzuarbeiten.</div>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">03</div>
+      <div class="value-title">Echten Mehrwert</div>
+      <div class="value-desc">Ich will Software bauen, die tatsächlich hilft — nicht Features um der Features willen, sondern Lösungen für echte Probleme.</div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <div class="footer-name">Ogulcan <span>Kaya</span></div>
+  <div class="footer-right">Media HAK Schwaz<br>Kommunikations- &amp; Medienportfolio</div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>document.getElementById('nav-toggle').addEventListener('click',function(){document.getElementById('nav-menu').classList.toggle('open');});</script>
+</body>
+</html>
