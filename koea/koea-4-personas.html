@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personas – TikTok | KOEA 4. Klasse | Ogulcan Kaya</title>
+  <link rel="icon" type="image/jpeg" href="../assets/kaya.jpg" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .projekt-page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: calc(var(--nav-h) + 4rem) var(--pad-x) 6rem;
+    }
+
+    /* Back */
+    .proj-back {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em;
+      color: var(--muted); margin-bottom: 2.5rem; text-decoration: none;
+      transition: color 0.2s;
+    }
+    .proj-back:hover { color: var(--orange); }
+
+    /* Meta */
+    .proj-meta { display: flex; gap: 0.75rem; margin-bottom: 1rem; flex-wrap: wrap; }
+    .proj-meta span {
+      font-family: var(--mono); font-size: 0.6rem;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 0.2rem 0.6rem; border: 1px solid var(--border);
+    }
+    .meta-fach { color: var(--orange); border-color: rgba(249,115,22,0.3); background: rgba(249,115,22,0.05); }
+    .meta-kl   { color: var(--blue-light); border-color: rgba(59,130,246,0.3); background: rgba(59,130,246,0.05); }
+    .meta-tool { color: var(--muted); }
+
+    /* Titel */
+    .proj-titel {
+      font-family: var(--display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800; line-height: 1.05;
+      color: var(--dark); margin-bottom: 0.6rem;
+    }
+    .proj-untertitel {
+      font-family: var(--mono); font-size: 0.82rem;
+      line-height: 1.8; color: #666; margin-bottom: 3rem;
+    }
+    .proj-divider { border: none; border-top: 1px solid var(--border); margin: 0 0 3rem; }
+
+    /* Leitfaden Sektionen */
+    .lf-section {
+      margin-bottom: 3.5rem;
+      padding-bottom: 3.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .lf-section:last-child { border-bottom: none; margin-bottom: 0; }
+
+    .lf-num {
+      font-family: var(--mono); font-size: 0.6rem;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--orange); margin-bottom: 0.4rem;
+    }
+    .lf-section h2 {
+      font-family: var(--display); font-size: 1.4rem;
+      font-weight: 800; color: var(--dark); margin-bottom: 1.25rem;
+    }
+    .lf-section p {
+      font-family: var(--mono); font-size: 0.8rem;
+      line-height: 1.9; color: #444;
+    }
+    .lf-section p + p { margin-top: 0.85rem; }
+
+    /* Aufgabe Screenshot */
+    .aufgabe-img {
+      width: 100%; border: 1px solid var(--border);
+      margin-top: 1.5rem; display: block;
+    }
+
+    /* Kompetenzen Liste */
+    .komp-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem; }
+    .komp-list li {
+      font-family: var(--mono); font-size: 0.8rem;
+      line-height: 1.7; color: #444;
+      padding-left: 1.2rem; position: relative;
+    }
+    .komp-list li::before { content: '→'; position: absolute; left: 0; color: var(--orange); }
+
+    /* Ergebnis — Personas Grid */
+    .personas-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .persona-card {
+      border: 1px solid var(--border);
+      background: var(--cream);
+      overflow: hidden;
+    }
+
+    .persona-header {
+      background: var(--dark);
+      padding: 1.25rem 1.5rem;
+      display: flex; flex-direction: column; gap: 0.3rem;
+    }
+    .persona-platform {
+      font-family: var(--mono); font-size: 0.6rem;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--orange);
+    }
+    .persona-name {
+      font-family: var(--display); font-size: 1.2rem;
+      font-weight: 800; color: #fff;
+    }
+    .persona-role {
+      font-family: var(--mono); font-size: 0.65rem;
+      color: rgba(255,255,255,0.45); letter-spacing: 0.08em;
+    }
+
+    .persona-body { padding: 1.25rem 1.5rem; }
+    .persona-row {
+      display: flex; justify-content: space-between;
+      padding: 0.5rem 0; border-bottom: 1px solid var(--border);
+      font-family: var(--mono); font-size: 0.7rem;
+    }
+    .persona-row:last-child { border-bottom: none; }
+    .persona-row-label { color: var(--muted); }
+    .persona-row-val { color: var(--dark); font-weight: 500; text-align: right; max-width: 60%; }
+
+    .persona-quote {
+      margin-top: 1rem;
+      padding: 0.9rem 1rem;
+      border-left: 2px solid var(--orange);
+      background: rgba(249,115,22,0.04);
+      font-family: var(--mono); font-size: 0.7rem;
+      font-style: italic; line-height: 1.65; color: #555;
+    }
+
+    /* PDF Embed */
+    .pdf-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .pdf-block { display: flex; flex-direction: column; gap: 0.6rem; }
+    .pdf-label {
+      font-family: var(--mono); font-size: 0.62rem;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+    }
+    .pdf-embed {
+      border: 1px solid var(--border);
+      background: #f5f5f5;
+    }
+    .pdf-embed object { display: block; width: 100%; height: 420px; }
+    .pdf-dl {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-family: var(--mono); font-size: 0.65rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--blue); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .pdf-dl:hover { color: var(--orange); }
+
+    @media (max-width: 700px) {
+      .personas-grid, .pdf-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav" id="site-nav">
+  <a href="../index.html" class="nav-logo">ogulcan.<span>kaya</span></a>
+  <ul class="nav-menu" id="nav-menu">
+    <li class="nav-item"><a href="../index.html" class="nav-link">Start</a></li>
+    <li class="nav-item has-sub">
+      <a href="../koea/index.html" class="nav-link active">KOEA</a>
+      <div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="../koea/4-klasse.html">4. Klasse</a><a href="../koea/5-klasse.html">5. Klasse</a></div>
+    </li>
+    <li class="nav-item has-sub">
+      <a href="../minf/index.html" class="nav-link">MINF</a>
+      <div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="../minf/1-klasse.html">1. Klasse</a><a href="../minf/2-klasse.html">2. Klasse</a><a href="../minf/3-klasse.html">3. Klasse</a><a href="../minf/4-klasse.html">4. Klasse</a></div>
+    </li>
+    <li class="nav-item has-sub">
+      <a href="../imsk/index.html" class="nav-link">IMSK</a>
+      <div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="../imsk/2-klasse.html">2. Klasse</a><a href="../imsk/3-klasse.html">3. Klasse</a></div>
+    </li>
+    <li class="nav-item has-sub">
+      <a href="../wop/index.html" class="nav-link">WOP</a>
+      <div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="../wop/3-klasse.html">3. Klasse</a><a href="../wop/4-klasse.html">4. Klasse</a><a href="../wop/5-klasse.html">5. Klasse</a></div>
+    </li>
+    <li class="nav-item has-sub">
+      <a href="../ntma/index.html" class="nav-link">NTMA</a>
+      <div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="../ntma/3-klasse.html">3. Klasse</a><a href="../ntma/4-klasse.html">4. Klasse</a></div>
+    </li>
+    <li class="nav-item"><a href="../lebenslauf.html" class="nav-link">Lebenslauf</a></li>
+    <li class="nav-item"><a href="../ueber-mich.html" class="nav-link">Über mich</a></li>
+    <li class="nav-item"><a href="../kontakt.html" class="nav-link">Kontakt</a></li>
+  </ul>
+  <button class="nav-toggle" id="nav-toggle"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="projekt-page">
+
+  <a href="../koea/4-klasse.html" class="proj-back">← Zurück zu KOEA 4. Klasse</a>
+
+  <div class="proj-meta">
+    <span class="meta-fach">KOEA</span>
+    <span class="meta-kl">4. Klasse</span>
+    <span class="meta-tool">Adobe InDesign</span>
+    <span class="meta-tool">Adobe Firefly</span>
+    <span class="meta-tool">Teamarbeit</span>
+  </div>
+
+  <h1 class="proj-titel">Personas entwickeln<br>für TikTok</h1>
+  <p class="proj-untertitel">
+    Zielgruppenanalyse und Erstellung von zwei detaillierten Personas im 2er-Team —
+    gestaltet als InDesign-Steckbriefe mit KI-generierten Fotos.
+  </p>
+
+  <hr class="proj-divider" />
+
+  <!-- 1. LERNSITUATION -->
+  <div class="lf-section">
+    <div class="lf-num">01 · Leitfaden</div>
+    <h2>Lernsituation</h2>
+    <p>
+      Im Rahmen des Unterrichts in KOEA (Kommunikation &amp; Öffentlichkeitsarbeit) erhielten
+      wir den Auftrag, im 2er-Team zwei Personas für die Plattform TikTok zu entwickeln.
+      Ziel war es, eine konkrete Zielgruppe zu definieren und diese in Form von detaillierten
+      Steckbriefen darzustellen — je eine weibliche und eine männliche Persona.
+    </p>
+    <p>
+      Die fertigen Steckbriefe wurden in Adobe InDesign gestaltet. Die Fotos der Personas
+      wurden mithilfe von Adobe Firefly (KI-Bildgenerator) erstellt. Beide Steckbriefe
+      sollten ein einheitliches "Look &amp; Feel" haben und nach den gelernten Designprinzipien
+      gestaltet sein.
+    </p>
+    <img src="../assets/koea-4-aufgabe.png" alt="Aufgabenstellung – Personas TikTok" class="aufgabe-img" />
+  </div>
+
+  <!-- 2. KOMPETENZEN -->
+  <div class="lf-section">
+    <div class="lf-num">02 · Leitfaden</div>
+    <h2>Kompetenzen</h2>
+    <ul class="komp-list">
+      <li>Zielgruppenanalyse: Merkmale, Bedürfnisse und Medienverhalten einer Persona definieren</li>
+      <li>Anwendung der Persona-Methode als Werkzeug der Kommunikationsplanung</li>
+      <li>Adobe InDesign: Layoutgestaltung, Typografie und konsistentes Design über mehrere Dokumente</li>
+      <li>Adobe Firefly: KI-gestützter Bildgenerator für realistische Personenfotos</li>
+      <li>Teamarbeit: Aufgabenverteilung, Abstimmung und gemeinsame Präsentation</li>
+      <li>Präsentationskompetenz: Vorstellung der Ergebnisse vor der Klasse</li>
+    </ul>
+  </div>
+
+  <!-- 3. UMSETZUNG -->
+  <div class="lf-section">
+    <div class="lf-num">03 · Leitfaden</div>
+    <h2>Umsetzung</h2>
+    <p>
+      Wir haben zwei Personas entwickelt, die typische TikTok-Nutzer repräsentieren:
+      eine junge Schülerin mit Interesse an Finanzen und Mathematik, sowie einen
+      ambitionierten Schüler mit Fokus auf Marketing und Selbstständigkeit.
+    </p>
+    <p>
+      Die Steckbriefe wurden in Adobe InDesign mit einheitlichem Design gestaltet.
+      Die Personenfotos wurden mit Adobe Firefly (KI von Adobe) generiert.
+      KI wurde ausschließlich für die Bildgenerierung eingesetzt — Konzept,
+      Text und Layout entstanden eigenständig im Team.
+    </p>
+
+    <!-- Personas Übersicht -->
+    <div class="personas-grid">
+
+      <div class="persona-card">
+        <div class="persona-header">
+          <span class="persona-platform">TikTok · Weiblich</span>
+          <span class="persona-name">Tina Tessa</span>
+          <span class="persona-role">Schülerin · 14 J. · Schwaz</span>
+        </div>
+        <div class="persona-body">
+          <div class="persona-row">
+            <span class="persona-row-label">Stärken</span>
+            <span class="persona-row-val">Mathematik, logisches Denken</span>
+          </div>
+          <div class="persona-row">
+            <span class="persona-row-label">Interesse</span>
+            <span class="persona-row-val">Finanzen, Weiterbildung</span>
+          </div>
+          <div class="persona-row">
+            <span class="persona-row-label">Lifestyle</span>
+            <span class="persona-row-val">Nachhaltig, ökologisch</span>
+          </div>
+          <div class="persona-row">
+            <span class="persona-row-label">Medien</span>
+            <span class="persona-row-val">X, TikTok, Instagram, Snapchat</span>
+          </div>
+          <div class="persona-quote">
+            „Ein Tag ohne Mathe gibt es nicht."
+          </div>
+        </div>
+      </div>
+
+      <div class="persona-card">
+        <div class="persona-header">
+          <span class="persona-platform">TikTok · Männlich</span>
+          <span class="persona-name">Tristan Tate</span>
+          <span class="persona-role">Schüler · 19 J. · Innsbruck</span>
+        </div>
+        <div class="persona-body">
+          <div class="persona-row">
+            <span class="persona-row-label">Stärken</span>
+            <span class="persona-row-val">Marketing, Medien, Disziplin</span>
+          </div>
+          <div class="persona-row">
+            <span class="persona-row-label">Interesse</span>
+            <span class="persona-row-val">Selbstständigkeit, Business</span>
+          </div>
+          <div class="persona-row">
+            <span class="persona-row-label">Lifestyle</span>
+            <span class="persona-row-val">Extrovertiert, style-bewusst</span>
+          </div>
+          <div class="persona-row">
+            <span class="persona-row-label">Medien</span>
+            <span class="persona-row-val">X, TikTok, Instagram, Reddit</span>
+          </div>
+          <div class="persona-quote">
+            „Life without money, isn't a life."
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- PDFs -->
+    <div class="pdf-grid" style="margin-top:2.5rem;">
+
+      <div class="pdf-block">
+        <span class="pdf-label">Steckbrief — Tina Tessa</span>
+        <div class="pdf-embed">
+          <object data="../assets/koea-4-steckbrief-tina.pdf" type="application/pdf">
+            <p style="padding:1.5rem;font-family:var(--mono);font-size:0.75rem;color:#666;">
+              PDF nicht ladbar —
+              <a href="../assets/koea-4-steckbrief-tina.pdf" target="_blank" style="color:var(--orange);">direkt öffnen ↗</a>
+            </p>
+          </object>
+        </div>
+        <a href="../assets/koea-4-steckbrief-tina.pdf" target="_blank" class="pdf-dl">↗ PDF öffnen</a>
+      </div>
+
+      <div class="pdf-block">
+        <span class="pdf-label">Steckbrief — Tristan Tate</span>
+        <div class="pdf-embed">
+          <object data="../assets/koea-4-steckbrief-tristan.pdf" type="application/pdf">
+            <p style="padding:1.5rem;font-family:var(--mono);font-size:0.75rem;color:#666;">
+              PDF nicht ladbar —
+              <a href="../assets/koea-4-steckbrief-tristan.pdf" target="_blank" style="color:var(--orange);">direkt öffnen ↗</a>
+            </p>
+          </object>
+        </div>
+        <a href="../assets/koea-4-steckbrief-tristan.pdf" target="_blank" class="pdf-dl">↗ PDF öffnen</a>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <div class="footer-name">Ogulcan <span>Kaya</span></div>
+  <div class="footer-right">Media HAK Schwaz<br>Kommunikations- &amp; Medienportfolio</div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>document.getElementById('nav-toggle').addEventListener('click',function(){document.getElementById('nav-menu').classList.toggle('open');});</script>
+</body>
+</html>
