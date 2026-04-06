@@ -102,6 +102,13 @@ ul { list-style: none; }
   transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
   border-top: 2px solid var(--orange);
 }
+/* Unsichtbare Brücke zwischen Link und Dropdown */
+.nav-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -14px; left: 0; right: 0;
+  height: 14px;
+}
 .nav-item:hover > .nav-dropdown {
   opacity: 1; visibility: visible;
   transform: translateX(-50%) translateY(0);
@@ -615,4 +622,15 @@ ul { list-style: none; }
     padding: 1rem; align-items: flex-start; gap: 0.1rem;
   }
   .nav-dropdown { position: static; opacity: 1; visibility: visible; transform: none; pointer-events: all; background: none; border: none; padding-left: 1rem; min-width: auto; border-top: none; }
+}
+
+/* ── Große Bildschirme — max-width + Proportionen ── */
+@media (min-width: 1400px) {
+  :root { --pad-x: clamp(3rem, 5vw, 6rem); }
+  .fach-hero, .tabs-bar, .cards-grid,
+  .section, .page-header, .cv-section,
+  .contact-section { max-width: 1400px; margin-left: auto; margin-right: auto; }
+  .cards-grid { margin-left: auto; margin-right: auto; padding: 0 var(--pad-x); }
+  .tabs-bar { margin-left: auto; margin-right: auto; padding: 0 var(--pad-x); }
+  .site-footer { max-width: 1400px; margin-left: auto; margin-right: auto; }
 }
