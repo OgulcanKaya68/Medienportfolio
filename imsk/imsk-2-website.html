@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Persönliche Website | IMSK 2. Klasse | Ogulcan Kaya</title>
+  <link rel="icon" type="image/jpeg" href="../assets/kaya.jpg" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .projekt-page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: calc(var(--nav-h) + 4rem) var(--pad-x) 6rem;
+    }
+
+    /* Back */
+    .proj-back {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em;
+      color: var(--muted); margin-bottom: 2.5rem; text-decoration: none;
+      transition: color 0.2s;
+    }
+    .proj-back:hover { color: var(--orange); }
+
+    /* Meta */
+    .proj-meta { display: flex; gap: 0.75rem; margin-bottom: 1rem; flex-wrap: wrap; }
+    .proj-meta span {
+      font-family: var(--mono); font-size: 0.6rem;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 0.2rem 0.6rem; border: 1px solid var(--border);
+    }
+    .meta-fach { color: var(--orange); border-color: rgba(249,115,22,0.3); background: rgba(249,115,22,0.05); }
+    .meta-kl   { color: var(--blue-light); border-color: rgba(59,130,246,0.3); background: rgba(59,130,246,0.05); }
+    .meta-tool { color: var(--muted); }
+
+    /* Titel */
+    .proj-titel {
+      font-family: var(--display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800; line-height: 1.05;
+      color: var(--dark); margin-bottom: 0.6rem;
+    }
+    .proj-untertitel {
+      font-family: var(--mono); font-size: 0.82rem;
+      line-height: 1.8; color: #666; margin-bottom: 3rem;
+    }
+    .proj-divider { border: none; border-top: 1px solid var(--border); margin: 0 0 3rem; }
+
+    /* Leitfaden Sektionen */
+    .lf-section {
+      margin-bottom: 3.5rem;
+      padding-bottom: 3.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .lf-section:last-child { border-bottom: none; margin-bottom: 0; }
+
+    .lf-num {
+      font-family: var(--mono); font-size: 0.6rem;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--orange); margin-bottom: 0.4rem;
+    }
+    .lf-section h2 {
+      font-family: var(--display); font-size: 1.4rem;
+      font-weight: 800; color: var(--dark); margin-bottom: 1.25rem;
+    }
+    .lf-section p {
+      font-family: var(--mono); font-size: 0.8rem;
+      line-height: 1.9; color: #444;
+    }
+    .lf-section p + p { margin-top: 0.85rem; }
+
+    /* Aufgabe / Ergebnis Screenshot */
+    .aufgabe-img {
+      width: 100%; border: 1px solid var(--border);
+      margin-top: 1.5rem; display: block;
+    }
+
+    /* Kompetenzen Liste */
+    .komp-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem; }
+    .komp-list li {
+      font-family: var(--mono); font-size: 0.8rem;
+      line-height: 1.7; color: #444;
+      padding-left: 1.2rem; position: relative;
+    }
+    .komp-list li::before { content: '→'; position: absolute; left: 0; color: var(--orange); }
+
+    /* Bewertungskriterien */
+    .kriterien-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .kriterium {
+      border: 1px solid var(--border);
+      background: var(--cream);
+      padding: 1.25rem 1.5rem;
+    }
+    .kriterium-num {
+      font-family: var(--mono); font-size: 0.58rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--orange); margin-bottom: 0.4rem;
+    }
+    .kriterium-title {
+      font-family: var(--display); font-size: 0.95rem;
+      font-weight: 800; color: var(--dark); margin-bottom: 0.4rem;
+    }
+    .kriterium-desc {
+      font-family: var(--mono); font-size: 0.7rem;
+      line-height: 1.65; color: #666;
+    }
+
+    /* Code-Preview */
+    .code-preview {
+      background: #1a1a1a;
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      margin-top: 1.5rem;
+      overflow-x: auto;
+    }
+    .code-preview pre {
+      font-family: var(--mono); font-size: 0.72rem;
+      line-height: 1.7; color: #ccc;
+      margin: 0; white-space: pre;
+    }
+    .code-tag { color: #7dd3fc; }
+    .code-attr { color: #fca5a5; }
+    .code-val  { color: #86efac; }
+    .code-comment { color: #555; }
+
+    @media (max-width: 600px) {
+      .kriterien-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav" id="site-nav">
+  <a href="../index.html" class="nav-logo">ogulcan.<span>kaya</span></a>
+  <ul class="nav-menu" id="nav-menu">
+    <li class="nav-item"><a href="../index.html" class="nav-link">Start</a></li>
+    <li class="nav-item has-sub">
+      <a href="../koea/index.html" class="nav-link">KOEA</a>
+      <div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="../koea/koea-4-personas.html">4. Klasse</a><a href="../koea/koea-5-tyrolit.html">5. Klasse</a></div>
+    </li>
+    <li class="nav-item has-sub">
+      <a href="../minf/index.html" class="nav-link">MINF</a>
+      <div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="../minf/1-klasse.html">1. Klasse</a><a href="../minf/2-klasse.html">2. Klasse</a><a href="../minf/3-klasse.html">3. Klasse</a><a href="../minf/4-klasse.html">4. Klasse</a></div>
+    </li>
+    <li class="nav-item has-sub">
+      <a href="../imsk/index.html" class="nav-link active">IMSK</a>
+      <div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="../imsk/imsk-2-website.html">2. Klasse</a><a href="../imsk/3-klasse.html">3. Klasse</a></div>
+    </li>
+    <li class="nav-item has-sub">
+      <a href="../wop/index.html" class="nav-link">WOP</a>
+      <div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="../wop/3-klasse.html">3. Klasse</a><a href="../wop/4-klasse.html">4. Klasse</a><a href="../wop/5-klasse.html">5. Klasse</a></div>
+    </li>
+    <li class="nav-item has-sub">
+      <a href="../ntma/index.html" class="nav-link">NTMA</a>
+      <div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="../ntma/3-klasse.html">3. Klasse</a><a href="../ntma/4-klasse.html">4. Klasse</a></div>
+    </li>
+    <li class="nav-item"><a href="../lebenslauf.html" class="nav-link">Lebenslauf</a></li>
+    <li class="nav-item"><a href="../ueber-mich.html" class="nav-link">Über mich</a></li>
+    <li class="nav-item"><a href="../kontakt.html" class="nav-link">Kontakt</a></li>
+  </ul>
+  <button class="nav-toggle" id="nav-toggle"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="projekt-page">
+
+  <a href="../imsk/index.html" class="proj-back">← Zurück zu IMSK</a>
+
+  <div class="proj-meta">
+    <span class="meta-fach">IMSK</span>
+    <span class="meta-kl">2. Klasse</span>
+    <span class="meta-tool">HTML</span>
+    <span class="meta-tool">CSS</span>
+  </div>
+
+  <h1 class="proj-titel">Persönliche Website<br>erstellen</h1>
+  <p class="proj-untertitel">
+    Erstellung einer persönlichen Website mit mehreren Unterseiten, funktionierendem Menü
+    und eingebundenen Bildern — reines HTML &amp; CSS ohne Frameworks.
+  </p>
+
+  <hr class="proj-divider" />
+
+  <!-- 1. LERNSITUATION -->
+  <div class="lf-section">
+    <div class="lf-num">01 · Leitfaden</div>
+    <h2>Lernsituation</h2>
+    <p>
+      Im Rahmen des Unterrichts in IMSK (Informationsmanagement &amp; Schriftverkehr) erhielten
+      wir den Auftrag, eine persönliche Website laut einer vorgegebenen Word-Datei zu erstellen.
+      Die Website sollte mehrere Seiten umfassen, ein funktionierendes Menü auf allen Seiten haben
+      und mit eigenen Bildern gestaltet sein.
+    </p>
+    <p>
+      Beurteilt wurden vier Aspekte: das Design, die Bildqualität, der Inhalt sowie die
+      korrekte Funktionsweise des Menüs. Als Abgabe wurde der gesamte Webauftritts-Ordner
+      als ZIP-Datei eingereicht.
+    </p>
+  </div>
+
+  <!-- 2. BEWERTUNGSKRITERIEN -->
+  <div class="lf-section">
+    <div class="lf-num">02 · Leitfaden</div>
+    <h2>Bewertungskriterien</h2>
+
+    <div class="kriterien-grid">
+      <div class="kriterium">
+        <div class="kriterium-num">Kriterium 01</div>
+        <div class="kriterium-title">Schönheit des Designs</div>
+        <div class="kriterium-desc">Passen die Farben zusammen? Stimmen Abstände und Breiten?</div>
+      </div>
+      <div class="kriterium">
+        <div class="kriterium-num">Kriterium 02</div>
+        <div class="kriterium-title">Bilder</div>
+        <div class="kriterium-desc">Sind die Bilder webgeeignet? Stimmt die Größe und Auflösung?</div>
+      </div>
+      <div class="kriterium">
+        <div class="kriterium-num">Kriterium 03</div>
+        <div class="kriterium-title">Inhalt</div>
+        <div class="kriterium-desc">Sinnvoller und relevanter Inhalt auf allen Seiten.</div>
+      </div>
+      <div class="kriterium">
+        <div class="kriterium-num">Kriterium 04</div>
+        <div class="kriterium-title">Menü-Funktionalität</div>
+        <div class="kriterium-desc">Funktionierendes Navigationsmenü auf allen Unterseiten.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. KOMPETENZEN -->
+  <div class="lf-section">
+    <div class="lf-num">03 · Leitfaden</div>
+    <h2>Kompetenzen</h2>
+    <ul class="komp-list">
+      <li>HTML-Grundstruktur: DOCTYPE, Head, Body, semantische Tags</li>
+      <li>CSS-Styling: Farben, Abstände, Breiten und Layout mit eigener Stylesheet-Datei</li>
+      <li>Verlinkung: Mehrere Unterseiten mit funktionierendem Navigationsmenü</li>
+      <li>Bildeinbindung: Webgeeignete Bilder mit korrekter Pfadangabe</li>
+      <li>Dateistruktur: Ordnerstruktur für einen Webauftritt (HTML, CSS, Bilder)</li>
+    </ul>
+  </div>
+
+  <!-- 4. ERGEBNIS -->
+  <div class="lf-section">
+    <div class="lf-num">04 · Leitfaden</div>
+    <h2>Ergebnis</h2>
+    <p>
+      Die Website besteht aus einer Startseite mit Header-Bild, Navigationsmenü
+      und Portrait-Foto sowie weiteren Unterseiten (Über mich, MINF, IMSK).
+      Das Menü ist auf allen Seiten eingebunden und verlinkt korrekt zu den
+      jeweiligen Unterseiten.
+    </p>
+
+    <img src="../assets/imsk-2-website.png" alt="Ergebnis – Persönliche Website IMSK 2. Klasse" class="aufgabe-img" />
+
+    <img src="../assets/imsk-2-code-screenshot.jpg" alt="Screenshot – Persönliche Website IMSK 2. Klasse" class="aufgabe-img" style="margin-top:2rem;" />
+
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <div class="footer-name">Ogulcan <span>Kaya</span></div>
+  <div class="footer-right">Media HAK Schwaz<br>Kommunikations- &amp; Medienportfolio</div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>document.getElementById('nav-toggle').addEventListener('click',function(){document.getElementById('nav-menu').classList.toggle('open');});</script>
+</body>
+</html>

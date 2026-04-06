@@ -3,23 +3,297 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MINF | Ogulcan Kaya</title>
+  <title>Werbespot Storyboard | MINF 2. Klasse | Ogulcan Kaya</title>
+  <link rel="icon" type="image/jpeg" href="../assets/kaya.jpg" />
   <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .projekt-page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: calc(var(--nav-h) + 4rem) var(--pad-x) 6rem;
+    }
+
+    .proj-back {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em;
+      color: var(--muted); margin-bottom: 2.5rem; text-decoration: none;
+      transition: color 0.2s;
+    }
+    .proj-back:hover { color: var(--orange); }
+
+    .proj-meta { display: flex; gap: 0.75rem; margin-bottom: 1rem; flex-wrap: wrap; }
+    .proj-meta span {
+      font-family: var(--mono); font-size: 0.6rem;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 0.2rem 0.6rem; border: 1px solid var(--border);
+    }
+    .meta-fach { color: var(--orange); border-color: rgba(249,115,22,0.3); background: rgba(249,115,22,0.05); }
+    .meta-kl   { color: var(--blue-light); border-color: rgba(59,130,246,0.3); background: rgba(59,130,246,0.05); }
+    .meta-tool { color: var(--muted); }
+
+    .proj-titel {
+      font-family: var(--display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800; line-height: 1.05;
+      color: var(--dark); margin-bottom: 0.6rem;
+    }
+    .proj-untertitel {
+      font-family: var(--mono); font-size: 0.82rem;
+      line-height: 1.8; color: #666; margin-bottom: 3rem;
+    }
+    .proj-divider { border: none; border-top: 1px solid var(--border); margin: 0 0 3rem; }
+
+    .lf-section {
+      margin-bottom: 3.5rem;
+      padding-bottom: 3.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .lf-section:last-child { border-bottom: none; margin-bottom: 0; }
+
+    .lf-num {
+      font-family: var(--mono); font-size: 0.6rem;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--orange); margin-bottom: 0.4rem;
+    }
+    .lf-section h2 {
+      font-family: var(--display); font-size: 1.4rem;
+      font-weight: 800; color: var(--dark); margin-bottom: 1.25rem;
+    }
+    .lf-section p {
+      font-family: var(--mono); font-size: 0.8rem;
+      line-height: 1.9; color: #444;
+    }
+    .lf-section p + p { margin-top: 0.85rem; }
+
+    .aufgabe-img {
+      width: 100%; border: 1px solid var(--border);
+      margin-top: 1.5rem; display: block;
+    }
+
+    .komp-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem; }
+    .komp-list li {
+      font-family: var(--mono); font-size: 0.8rem;
+      line-height: 1.7; color: #444;
+      padding-left: 1.2rem; position: relative;
+    }
+    .komp-list li::before { content: '→'; position: absolute; left: 0; color: var(--orange); }
+
+    .kriterien-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .kriterium {
+      border: 1px solid var(--border);
+      background: var(--cream);
+      padding: 1.25rem 1.5rem;
+    }
+    .kriterium-num {
+      font-family: var(--mono); font-size: 0.58rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--orange); margin-bottom: 0.4rem;
+    }
+    .kriterium-title {
+      font-family: var(--display); font-size: 0.95rem;
+      font-weight: 800; color: var(--dark); margin-bottom: 0.4rem;
+    }
+    .kriterium-desc {
+      font-family: var(--mono); font-size: 0.7rem;
+      line-height: 1.65; color: #666;
+    }
+
+    /* Szenen-Tabelle */
+    .szenen-table {
+      width: 100%; border-collapse: collapse; margin-top: 1.5rem;
+    }
+    .szenen-table th, .szenen-table td {
+      font-family: var(--mono); font-size: 0.72rem;
+      line-height: 1.6; color: #444;
+      padding: 0.75rem 1rem; border: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .szenen-table th {
+      background: var(--cream); color: var(--dark);
+      font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-size: 0.6rem;
+    }
+    .szenen-table tr:hover td { background: rgba(0,0,0,0.02); }
+
+    @media (max-width: 600px) {
+      .kriterien-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-<div class="bg-grid"></div>
-<div class="bg-glow-blue"></div>
-<main>
-  <div class="page-header">
-    <span class="tag">MINF</span>
-    <h1>Klasse</h1>
+
+<nav class="site-nav" id="site-nav">
+  <a href="../index.html" class="nav-logo">ogulcan.<span>kaya</span></a>
+  <ul class="nav-menu" id="nav-menu">
+    <li class="nav-item"><a href="../index.html" class="nav-link">Start</a></li>
+    <li class="nav-item has-sub">
+      <a href="../koea/index.html" class="nav-link">KOEA</a>
+      <div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="../koea/koea-4-personas.html">4. Klasse</a><a href="../koea/koea-5-tyrolit.html">5. Klasse</a></div>
+    </li>
+    <li class="nav-item has-sub">
+      <a href="../minf/index.html" class="nav-link active">MINF</a>
+      <div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="../minf/1-klasse.html">1. Klasse</a><a href="../minf/2-klasse.html">2. Klasse</a><a href="../minf/3-klasse.html">3. Klasse</a><a href="../minf/4-klasse.html">4. Klasse</a></div>
+    </li>
+    <li class="nav-item has-sub">
+      <a href="../imsk/index.html" class="nav-link">IMSK</a>
+      <div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="../imsk/imsk-2-website.html">2. Klasse</a><a href="../imsk/3-klasse.html">3. Klasse</a></div>
+    </li>
+    <li class="nav-item has-sub">
+      <a href="../wop/index.html" class="nav-link">WOP</a>
+      <div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="../wop/3-klasse.html">3. Klasse</a><a href="../wop/4-klasse.html">4. Klasse</a><a href="../wop/5-klasse.html">5. Klasse</a></div>
+    </li>
+    <li class="nav-item has-sub">
+      <a href="../ntma/index.html" class="nav-link">NTMA</a>
+      <div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="../ntma/3-klasse.html">3. Klasse</a><a href="../ntma/4-klasse.html">4. Klasse</a></div>
+    </li>
+    <li class="nav-item"><a href="../lebenslauf.html" class="nav-link">Lebenslauf</a></li>
+    <li class="nav-item"><a href="../ueber-mich.html" class="nav-link">Über mich</a></li>
+    <li class="nav-item"><a href="../kontakt.html" class="nav-link">Kontakt</a></li>
+  </ul>
+  <button class="nav-toggle" id="nav-toggle"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="projekt-page">
+
+  <a href="../minf/index.html" class="proj-back">← Zurück zu MINF</a>
+
+  <div class="proj-meta">
+    <span class="meta-fach">MINF</span>
+    <span class="meta-kl">2. Klasse</span>
+    <span class="meta-tool">Storyboard</span>
+    <span class="meta-tool">Video</span>
   </div>
-  <div class="cards-grid">
-    <!-- Projektkarten hier einfügen -->
+
+  <h1 class="proj-titel">Werbespot<br>Storyboard</h1>
+  <p class="proj-untertitel">
+    Planung eines 20- bis 30-sekündigen Werbespots für eine selbst gewählte Dienstleistung —
+    mit Storyboard, Zielgruppenanalyse und vollständiger Szenenplanung.
+  </p>
+
+  <hr class="proj-divider" />
+
+  <!-- 1. LERNSITUATION -->
+  <div class="lf-section">
+    <div class="lf-num">01 · Leitfaden</div>
+    <h2>Lernsituation</h2>
+    <p>
+      Im MINF-Unterricht planten wir einen Werbespot von 20 bis 30 Sekunden Länge für
+      eine Dienstleistung unserer Wahl. Ich entschied mich für einen fiktiven
+      Rechtsanwalts-Spot, in dem ich mich selbst als Anwalt "Oji" vorstelle.
+    </p>
+    <p>
+      Zuerst wurde die Dienstleistung und Zielgruppe schriftlich beschrieben sowie
+      ein passendes Logo gesucht. Anschließend erstellte ich ein vollständiges Storyboard
+      auf Basis der Kursnotizbuch-Vorlage — mit Szenenbeschreibungen, Einstellungsgrößen,
+      gesprochenem Text, Musik und Kamerabewegungen. Das fertige Storyboard wurde als
+      PDF bzw. JPG im Kursnotizbuch (AA06 Storyboard Werbespot) abgegeben.
+    </p>
+
+    <img src="../assets/minf-2-angabe.png" alt="Aufgabenstellung – Werbespot Storyboard MINF 2. Klasse" class="aufgabe-img" />
   </div>
-</main>
-<div id="site-footer"></div>
-<script src="../js/nav.js"></script>
+
+  <!-- 2. STORYBOARD SZENEN -->
+  <div class="lf-section">
+    <div class="lf-num">02 · Leitfaden</div>
+    <h2>Szenenübersicht</h2>
+
+    <table class="szenen-table">
+      <thead>
+        <tr>
+          <th>Szene</th>
+          <th>Beschreibung</th>
+          <th>EG</th>
+          <th>Text / Audio</th>
+          <th>Dauer</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Die Werbung startet mit einer „Intro"-Einblendung auf schwarzem Hintergrund.</td>
+          <td>Nah</td>
+          <td>mp3-Datei</td>
+          <td>ca. 4 Sek</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Die Kamera zeigt mich von unten nach oben (Kamera geht langsam nach oben).</td>
+          <td>Groß</td>
+          <td>mp3-Datei</td>
+          <td>ca. 6 Sek</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Ich werde komplett gezeigt — ich richte meinen Hemdkragen (Anzug).</td>
+          <td>Total</td>
+          <td>mp3-Datei</td>
+          <td>ca. 4 Sek</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Ich stelle mich vor (gleiche Einstellung wie Szene 3, etwas mehr Handbewegungen).</td>
+          <td>Halbtotal</td>
+          <td>„Hey, ich bin Ogi — wusstest du, dass du Rechte hast? Die Verfassung sagt, dass Sie es tun, und ich tue es auch." · Musik im Hintergrund (leise)</td>
+          <td>ca. 7 Sek</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Ich bin in meinem „Büro" — sitze am Schreibtisch mit Büchern (leicht gezoomt).</td>
+          <td>Halbnah</td>
+          <td>„Ich glaube, dass bis zum Beweis der Schuld jeder Mann, jede Frau und jedes Kind unschuldig ist — und deshalb kämpfe ich für dich, Schwaz."</td>
+          <td>ca. 6 Sek</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>Die Werbung geht zu Ende — am Ende sieht man mein Logo.</td>
+          <td>—</td>
+          <td>„Rufen Sie mich an! Beauftragen Sie Oji!"</td>
+          <td>ca. 3 Sek</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 3. KOMPETENZEN -->
+  <div class="lf-section">
+    <div class="lf-num">03 · Leitfaden</div>
+    <h2>Kompetenzen</h2>
+    <ul class="komp-list">
+      <li>Zielgruppenanalyse: Beschreibung der Dienstleistung und Zielgruppe</li>
+      <li>Storyboard: Planung von Einstellungsgrößen, Kamerabewegungen und Timing</li>
+      <li>Drehbuch: Formulierung von gesprochenem Text und Audiokonzept</li>
+      <li>Logorecherche: Suche nach einer passenden Vektordatei</li>
+      <li>Medienkompetenz: Planung eines realistisch umsetzbaren Kurzvideos</li>
+    </ul>
+  </div>
+
+  <!-- 4. ERGEBNIS -->
+  <div class="lf-section">
+    <div class="lf-num">04 · Leitfaden</div>
+    <h2>Ergebnis</h2>
+    <p>
+      Das fertige Storyboard umfasst 6 Szenen mit einer Gesamtlänge von ca. 30 Sekunden.
+      Der Spot stellt mich als fiktiven Rechtsanwalt „Oji" vor — mit Kamerafahrt von unten,
+      Selbstvorstellung im Anzug, Bürosequenz und Abschluss-Logo.
+    </p>
+
+    <img src="../assets/minf-2-storyboard-1.jpeg" alt="Storyboard Seite 1 – Szenen 1 und 2" class="aufgabe-img" />
+    <img src="../assets/minf-2-storyboard-2.jpeg" alt="Storyboard Seite 2 – Szenen 3 bis 5" class="aufgabe-img" style="margin-top: 2rem;" />
+    <img src="../assets/minf-2-storyboard-3.jpeg" alt="Storyboard Seite 3 – Szene 6" class="aufgabe-img" style="margin-top: 2rem;" />
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <div class="footer-name">Ogulcan <span>Kaya</span></div>
+  <div class="footer-right">Media HAK Schwaz<br>Kommunikations- &amp; Medienportfolio</div>
+</footer>
+
 <script src="../js/main.js"></script>
+<script>document.getElementById('nav-toggle').addEventListener('click',function(){document.getElementById('nav-menu').classList.toggle('open');});</script>
 </body>
 </html>
