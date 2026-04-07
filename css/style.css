@@ -623,28 +623,143 @@ ul { list-style: none; }
   .nav-toggle { display: flex; }
   .nav-menu.open {
     display: flex; flex-direction: column;
-    position: fixed; top: var(--nav-h); left: 0; right: 0;
-    background: rgba(242,237,228,0.97);
-    border-bottom: 1px solid var(--border);
-    padding: 1rem; align-items: flex-start; gap: 0.1rem;
+    position: fixed; top: var(--nav-h); left: 0; right: 0; bottom: 0;
+    background: var(--cream);
+    border-top: 2px solid var(--orange);
+    padding: 1.25rem 1.5rem 2rem;
+    align-items: flex-start; gap: 0;
+    overflow-y: auto;
   }
+  /* Nav-Items auf Mobile */
+  .nav-menu.open .nav-item { width: 100%; border-bottom: 1px solid var(--border); }
+  .nav-menu.open .nav-link {
+    padding: 0.85rem 0;
+    font-size: 0.78rem;
+    color: var(--dark);
+    width: 100%;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .nav-menu.open .nav-link:hover, .nav-menu.open .nav-link.active { color: var(--orange); }
   /* Dropdown — Accordion-Verhalten auf Mobile */
   .nav-dropdown {
     position: static; opacity: 1; visibility: visible;
     transform: none; pointer-events: all;
     background: none; border: none;
-    padding-left: 1rem; min-width: auto; border-top: none;
+    padding: 0 0 0.5rem 0.75rem; min-width: auto; border-top: none;
     display: none;
   }
   .nav-item.has-sub.sub-open > .nav-dropdown { display: block; }
   /* Kontrast: heller Hintergrund → dunkle Schrift */
-  .nav-dropdown a { color: var(--dark); opacity: 0.75; }
-  .nav-dropdown a:hover, .nav-dropdown a.active { color: var(--orange); opacity: 1; background: rgba(0,0,0,0.04); }
-  .nav-dropdown .dropdown-label { color: rgba(0,0,0,0.3); border-bottom-color: rgba(0,0,0,0.08); }
+  .nav-dropdown a {
+    color: var(--dark); opacity: 0.65;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.7rem;
+    display: block;
+  }
+  .nav-dropdown a:hover, .nav-dropdown a.active { color: var(--orange); opacity: 1; background: rgba(0,0,0,0.03); border-radius: 3px; }
+  .nav-dropdown .dropdown-label { color: rgba(0,0,0,0.3); border-bottom-color: rgba(0,0,0,0.06); }
   /* Chevron dreht sich beim Öffnen */
   .nav-item.has-sub > .nav-link::after { display: inline-block; transition: transform 0.2s; }
   .nav-item.has-sub.sub-open > .nav-link::after { transform: rotate(180deg); }
+  /* Sonstige Responsive-Fixes */
+  .tabs-bar { gap: 0.4rem; flex-wrap: wrap; }
+  .tab-btn { font-size: 0.65rem; padding: 0.45rem 0.9rem; }
+  .lf-grid { grid-template-columns: 1fr !important; }
+  .kriterien-grid, .screenshot-grid { grid-template-columns: 1fr !important; }
 }
+
+/* ══════════════════════════════════════════════
+   BILD-HOVER WRAPPER & LIGHTBOX
+   ══════════════════════════════════════════════ */
+
+/* Wrapper (via JS erzeugt) */
+.img-zoom-wrap {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 6px;
+}
+.img-zoom-wrap img {
+  display: block;
+  width: 100%;
+  transition: transform 0.35s ease;
+}
+.img-zoom-wrap:hover img {
+  transform: scale(1.025);
+}
+.img-zoom-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 0.75rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.35) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.img-zoom-wrap:hover .img-zoom-overlay {
+  opacity: 1;
+}
+.img-zoom-overlay span {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(0,0,0,0.55);
+  padding: 0.3rem 0.75rem;
+  border-radius: 3px;
+  backdrop-filter: blur(4px);
+}
+
+/* Lightbox Overlay */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10,10,10,0.92);
+  z-index: 9900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  backdrop-filter: blur(6px);
+}
+.lightbox-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+.lightbox-inner {
+  position: relative;
+  max-width: 92vw;
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lightbox-inner img {
+  max-width: 92vw;
+  max-height: 88vh;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+}
+.lightbox-close {
+  position: absolute;
+  top: -2.5rem;
+  right: 0;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.7);
+  font-size: 1.4rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  transition: color 0.15s;
+  line-height: 1;
+}
+.lightbox-close:hover { color: #fff; }
 
 /* ── Große Bildschirme — max-width + Proportionen ── */
 @media (min-width: 1400px) {
