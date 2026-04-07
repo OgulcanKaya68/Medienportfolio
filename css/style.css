@@ -628,7 +628,22 @@ ul { list-style: none; }
     border-bottom: 1px solid var(--border);
     padding: 1rem; align-items: flex-start; gap: 0.1rem;
   }
-  .nav-dropdown { position: static; opacity: 1; visibility: visible; transform: none; pointer-events: all; background: none; border: none; padding-left: 1rem; min-width: auto; border-top: none; }
+  /* Dropdown — Accordion-Verhalten auf Mobile */
+  .nav-dropdown {
+    position: static; opacity: 1; visibility: visible;
+    transform: none; pointer-events: all;
+    background: none; border: none;
+    padding-left: 1rem; min-width: auto; border-top: none;
+    display: none;
+  }
+  .nav-item.has-sub.sub-open > .nav-dropdown { display: block; }
+  /* Kontrast: heller Hintergrund → dunkle Schrift */
+  .nav-dropdown a { color: var(--dark); opacity: 0.75; }
+  .nav-dropdown a:hover, .nav-dropdown a.active { color: var(--orange); opacity: 1; background: rgba(0,0,0,0.04); }
+  .nav-dropdown .dropdown-label { color: rgba(0,0,0,0.3); border-bottom-color: rgba(0,0,0,0.08); }
+  /* Chevron dreht sich beim Öffnen */
+  .nav-item.has-sub > .nav-link::after { display: inline-block; transition: transform 0.2s; }
+  .nav-item.has-sub.sub-open > .nav-link::after { transform: rotate(180deg); }
 }
 
 /* ── Große Bildschirme — max-width + Proportionen ── */

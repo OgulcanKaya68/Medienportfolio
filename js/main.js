@@ -4,6 +4,33 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
+  /* ── Mobile Navigation ─────────────────────── */
+  const navToggle = document.getElementById('nav-toggle');
+  const navMenu   = document.getElementById('nav-menu');
+  if (navToggle && navMenu) {
+    navToggle.addEventListener('click', function () {
+      navMenu.classList.toggle('open');
+    });
+    // Menü schließen wenn außerhalb geklickt
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('.site-nav')) {
+        navMenu.classList.remove('open');
+        document.querySelectorAll('.nav-item.has-sub.sub-open')
+          .forEach(function (el) { el.classList.remove('sub-open'); });
+      }
+    });
+  }
+
+  // Submenu Accordion (nur Mobile)
+  document.querySelectorAll('.nav-item.has-sub > .nav-link').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      if (window.innerWidth <= 960) {
+        e.preventDefault();
+        this.parentElement.classList.toggle('sub-open');
+      }
+    });
+  });
+
   /* ── Typewriter Effekt ─────────────────────── */
   const twEl = document.getElementById('tw-text');
   if (twEl) {

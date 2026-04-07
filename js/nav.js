@@ -22,7 +22,6 @@
         { label: '1. Klasse', href: 'minf/1-klasse.html' },
         { label: '2. Klasse', href: 'minf/2-klasse.html' },
         { label: '3. Klasse', href: 'minf/3-klasse.html' },
-        { label: '4. Klasse', href: 'minf/4-klasse.html' },
       ]
     },
     {
@@ -79,7 +78,7 @@
         const drops = item.sub.map(s =>
           `<a href="${resolveHref(s.href)}">${s.label}</a>`
         ).join('');
-        return `<li class="nav-item">
+        return `<li class="nav-item has-sub">
           <a href="${resolveHref(item.label.toLowerCase() + '/index.html')}" class="nav-link">
             ${item.label}${chevron}
           </a>
@@ -136,7 +135,24 @@
       toggle.addEventListener('click', function () {
         menu.classList.toggle('open');
       });
+      document.addEventListener('click', function (e) {
+        if (!e.target.closest('.site-nav')) {
+          menu.classList.remove('open');
+          document.querySelectorAll('.nav-item.has-sub.sub-open')
+            .forEach(function (el) { el.classList.remove('sub-open'); });
+        }
+      });
     }
+
+    // Submenu Accordion (nur Mobile)
+    document.querySelectorAll('.nav-item.has-sub > .nav-link').forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        if (window.innerWidth <= 960) {
+          e.preventDefault();
+          this.parentElement.classList.toggle('sub-open');
+        }
+      });
+    });
 
     // Aktive Seite markieren
     const current = window.location.pathname;
