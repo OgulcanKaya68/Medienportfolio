@@ -3,24 +3,583 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WOP | Ogulcan Kaya</title>
+  <title>Kognitive Biases | WOP 5. Klasse | Ogulcan Kaya</title>
+  <link rel="icon" type="image/jpeg" href="../assets/kaya.jpg" />
   <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .projekt-page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: calc(var(--nav-h) + 4rem) var(--pad-x) 6rem;
+    }
+
+    .proj-back {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em;
+      color: var(--muted); margin-bottom: 2.5rem; text-decoration: none;
+      transition: color 0.2s;
+    }
+    .proj-back:hover { color: var(--orange); }
+
+    .proj-meta { display: flex; gap: 0.75rem; margin-bottom: 1rem; flex-wrap: wrap; }
+    .proj-meta span {
+      font-family: var(--mono); font-size: 0.6rem;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 0.2rem 0.6rem; border: 1px solid var(--border);
+    }
+    .meta-fach { color: var(--orange); border-color: rgba(249,115,22,0.3); background: rgba(249,115,22,0.05); }
+    .meta-kl   { color: var(--blue-light); border-color: rgba(59,130,246,0.3); background: rgba(59,130,246,0.05); }
+    .meta-tool { color: var(--muted); }
+
+    .proj-titel {
+      font-family: var(--display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800; line-height: 1.05;
+      color: var(--dark); margin-bottom: 0.6rem;
+    }
+    .proj-untertitel {
+      font-family: var(--mono); font-size: 0.82rem;
+      line-height: 1.8; color: #666; margin-bottom: 2rem;
+    }
+    .proj-divider { border: none; border-top: 1px solid var(--border); margin: 0 0 2.5rem; }
+
+    /* Intro section */
+    .lf-section {
+      margin-bottom: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .lf-num {
+      font-family: var(--mono); font-size: 0.6rem;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--orange); margin-bottom: 0.4rem;
+    }
+    .lf-section h2 {
+      font-family: var(--display); font-size: 1.4rem;
+      font-weight: 800; color: var(--dark); margin-bottom: 1.25rem;
+    }
+    .lf-section p {
+      font-family: var(--mono); font-size: 0.8rem;
+      line-height: 1.9; color: #444;
+    }
+
+    /* Stat bar */
+    .stat-bar {
+      display: flex; gap: 2rem; flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+    .stat-item {
+      display: flex; flex-direction: column; gap: 0.2rem;
+    }
+    .stat-num {
+      font-family: var(--condensed); font-size: 2.8rem;
+      line-height: 1; color: var(--dark); letter-spacing: 0.02em;
+    }
+    .stat-num span { color: var(--orange); }
+    .stat-label {
+      font-family: var(--mono); font-size: 0.62rem;
+      letter-spacing: 0.14em; text-transform: uppercase; color: #888;
+    }
+
+    /* Filter bar */
+    .filter-bar {
+      display: flex; gap: 0.5rem; flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+    .filter-btn {
+      font-family: var(--mono); font-size: 0.62rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.3rem 0.9rem; border: 1px solid var(--border);
+      background: transparent; color: #666; cursor: pointer;
+      transition: all 0.18s;
+    }
+    .filter-btn:hover { border-color: var(--orange); color: var(--orange); }
+    .filter-btn.active { background: var(--dark); color: #fff; border-color: var(--dark); }
+
+    /* Bias count */
+    .bias-count {
+      font-family: var(--mono); font-size: 0.65rem;
+      color: #999; letter-spacing: 0.08em;
+      margin-bottom: 1.25rem;
+    }
+    .bias-count strong { color: var(--dark); }
+
+    /* Bias grid */
+    .bias-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1px;
+      border: 1px solid var(--border);
+      background: var(--border);
+    }
+
+    .bias-card {
+      background: #fff;
+      padding: 1.4rem 1.5rem;
+      cursor: pointer;
+      transition: background 0.15s;
+      position: relative;
+    }
+    .bias-card:hover { background: #fafaf8; }
+    .bias-card.open { background: var(--cream); }
+
+    .bias-cat-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      display: inline-block; margin-bottom: 0.6rem;
+    }
+    .bias-name {
+      font-family: var(--display); font-size: 0.95rem;
+      font-weight: 800; color: var(--dark);
+      margin-bottom: 0; line-height: 1.2;
+    }
+    .bias-cat-label {
+      font-family: var(--mono); font-size: 0.55rem;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: #aaa; margin-top: 0.25rem; margin-bottom: 0;
+    }
+    .bias-toggle {
+      position: absolute; top: 1.4rem; right: 1.4rem;
+      font-size: 0.75rem; color: #bbb; transition: transform 0.2s;
+    }
+    .bias-card.open .bias-toggle { transform: rotate(45deg); color: var(--orange); }
+
+    .bias-body {
+      font-family: var(--mono); font-size: 0.75rem;
+      line-height: 1.75; color: #555;
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.3s ease, padding-top 0.3s ease;
+    }
+    .bias-card.open .bias-body {
+      max-height: 300px;
+      padding-top: 0.9rem;
+    }
+
+    /* Category dot colors */
+    .cat-selbst   { background: #f97316; }
+    .cat-sozial   { background: #3b82f6; }
+    .cat-entsch   { background: #10b981; }
+    .cat-kognit   { background: #8b5cf6; }
+    .cat-sonstig  { background: #6b7280; }
+
+    /* Hidden when filtered */
+    .bias-card.hidden { display: none; }
+
+    @media (max-width: 600px) {
+      .bias-grid { grid-template-columns: 1fr; }
+      .stat-bar { gap: 1.5rem; }
+    }
+  </style>
 </head>
 <body>
-<div class="bg-grid"></div>
-<div class="bg-glow-blue"></div>
-<main>
-  <div class="page-header">
-    <span class="tag">Fachbereich</span>
-    <h1>W<span class="gradient-text">OP</span></h1>
-    <p>Wirtschaft, Organisation &amp; Psychologie – 3., 4. und 5. Klasse.</p>
+
+<nav class="site-nav" id="site-nav">
+  <a href="../index.html" class="nav-logo">ogulcan.<span>kaya</span></a>
+  <ul class="nav-menu" id="nav-menu">
+    <li class="nav-item"><a href="../index.html" class="nav-link">Start</a></li>
+    <li class="nav-item has-sub">
+      <a href="../koea/index.html" class="nav-link">KOEA</a>
+      <div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="../koea/koea-4-personas.html">4. Klasse</a><a href="../koea/koea-5-tyrolit.html">5. Klasse</a></div>
+    </li>
+    <li class="nav-item has-sub">
+      <a href="../minf/index.html" class="nav-link">MINF</a>
+      <div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="../minf/1-klasse.html">1. Klasse</a><a href="../minf/2-klasse.html">2. Klasse</a><a href="../minf/3-klasse.html">3. Klasse</a><a href="../minf/4-klasse.html">4. Klasse</a></div>
+    </li>
+    <li class="nav-item has-sub">
+      <a href="../imsk/index.html" class="nav-link">IMSK</a>
+      <div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="../imsk/imsk-2-website.html">2. Klasse</a><a href="../imsk/3-klasse.html">3. Klasse</a></div>
+    </li>
+    <li class="nav-item has-sub">
+      <a href="../wop/index.html" class="nav-link active">WOP</a>
+      <div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="../wop/3-klasse.html">3. Klasse</a><a href="../wop/4-klasse.html">4. Klasse</a><a href="../wop/5-klasse.html">5. Klasse</a></div>
+    </li>
+    <li class="nav-item has-sub">
+      <a href="../ntma/index.html" class="nav-link">NTMA</a>
+      <div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="../ntma/3-klasse.html">3. Klasse</a><a href="../ntma/4-klasse.html">4. Klasse</a></div>
+    </li>
+    <li class="nav-item"><a href="../lebenslauf.html" class="nav-link">Lebenslauf</a></li>
+    <li class="nav-item"><a href="../ueber-mich.html" class="nav-link">Über mich</a></li>
+    <li class="nav-item"><a href="../kontakt.html" class="nav-link">Kontakt</a></li>
+  </ul>
+  <button class="nav-toggle" id="nav-toggle"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="projekt-page">
+
+  <a href="../wop/index.html" class="proj-back">← Zurück zu WOP</a>
+
+  <div class="proj-meta">
+    <span class="meta-fach">WOP</span>
+    <span class="meta-kl">5. Klasse</span>
+    <span class="meta-tool">Kognitive Psychologie</span>
+    <span class="meta-tool">Verhaltensökonomie</span>
   </div>
-  <div class="cards-grid">
-    <!-- Projektkarten hier einfügen -->
+
+  <h1 class="proj-titel">Kognitive<br>Biases</h1>
+  <p class="proj-untertitel">
+    Systematische Denkfehler und Wahrnehmungsverzerrungen — eine Übersicht der
+    wichtigsten Biases aus Psychologie und Verhaltensökonomie.
+  </p>
+
+  <hr class="proj-divider" />
+
+  <!-- 1. LERNSITUATION -->
+  <div class="lf-section">
+    <div class="lf-num">01 · Leitfaden</div>
+    <h2>Lernsituation</h2>
+    <p>
+      Im WOP-Unterricht der 5. Klasse wählten wir ein selbst gewähltes Thema aus dem
+      Schuljahr und erklärten es strukturiert. Ich entschied mich für eine Zusammenfassung
+      kognitiver Biases — systematischer Denkfehler, die unser Urteilen, Entscheiden
+      und Wahrnehmen unbewusst beeinflussen.
+    </p>
   </div>
-</main>
-<div id="site-footer"></div>
-<script src="../js/nav.js"></script>
+
+  <!-- 2. BIAS-ÜBERSICHT -->
+  <div>
+    <div class="lf-num">02 · Leitfaden</div>
+    <h2 style="font-family:var(--display);font-size:1.4rem;font-weight:800;color:var(--dark);margin-bottom:1.5rem;">Bias-Übersicht</h2>
+
+    <div class="stat-bar">
+      <div class="stat-item"><div class="stat-num">3<span>3</span></div><div class="stat-label">Biases dokumentiert</div></div>
+      <div class="stat-item"><div class="stat-num" style="font-size:2.8rem;">5</div><div class="stat-label">Kategorien</div></div>
+    </div>
+
+    <div class="filter-bar" id="filter-bar">
+      <button class="filter-btn active" data-cat="all">Alle</button>
+      <button class="filter-btn" data-cat="selbst"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#f97316;margin-right:5px;vertical-align:middle;"></span>Selbstwahrnehmung</button>
+      <button class="filter-btn" data-cat="sozial"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#3b82f6;margin-right:5px;vertical-align:middle;"></span>Soziale Phänomene</button>
+      <button class="filter-btn" data-cat="entsch"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#10b981;margin-right:5px;vertical-align:middle;"></span>Entscheidung & Urteil</button>
+      <button class="filter-btn" data-cat="kognit"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#8b5cf6;margin-right:5px;vertical-align:middle;"></span>Kognition & Wahrnehmung</button>
+      <button class="filter-btn" data-cat="sonstig"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#6b7280;margin-right:5px;vertical-align:middle;"></span>Sonstige</button>
+    </div>
+
+    <div class="bias-count" id="bias-count"><strong>33</strong> Biases werden angezeigt</div>
+
+    <div class="bias-grid" id="bias-grid">
+
+      <!-- SELBSTWAHRNEHMUNG -->
+      <div class="bias-card" data-cat="selbst">
+        <span class="bias-cat-dot cat-selbst"></span>
+        <div class="bias-name">Better-than-average Bias</div>
+        <div class="bias-cat-label">Selbstwahrnehmung</div>
+        <span class="bias-toggle">+</span>
+        <div class="bias-body">Die Tendenz, sich selbst überdurchschnittlich gut einzuschätzen — z.&nbsp;B. „Ich fahre besser Auto als die meisten" (ca. 80&nbsp;% denken das). Problem: statistisch unmöglich, da sich der Durchschnitt dadurch verschieben würde.</div>
+      </div>
+
+      <div class="bias-card" data-cat="selbst">
+        <span class="bias-cat-dot cat-selbst"></span>
+        <div class="bias-name">Dunning-Kruger-Effekt</div>
+        <div class="bias-cat-label">Selbstwahrnehmung</div>
+        <span class="bias-toggle">+</span>
+        <div class="bias-body">Menschen mit geringer Kompetenz überschätzen sich; Menschen mit hoher Kompetenz unterschätzen sich.</div>
+      </div>
+
+      <div class="bias-card" data-cat="selbst">
+        <span class="bias-cat-dot cat-selbst"></span>
+        <div class="bias-name">Self-serving Bias</div>
+        <div class="bias-cat-label">Selbstwahrnehmung</div>
+        <span class="bias-toggle">+</span>
+        <div class="bias-body">Erfolge schreibt man sich selbst zu, Misserfolge äußeren Umständen.</div>
+      </div>
+
+      <div class="bias-card" data-cat="selbst">
+        <span class="bias-cat-dot cat-selbst"></span>
+        <div class="bias-name">Spotlight-Effekt</div>
+        <div class="bias-cat-label">Selbstwahrnehmung</div>
+        <span class="bias-toggle">+</span>
+        <div class="bias-body">Man überschätzt, wie sehr andere einen beobachten und beurteilen — man überschätzt seine Wirkung auf andere.</div>
+      </div>
+
+      <div class="bias-card" data-cat="selbst">
+        <span class="bias-cat-dot cat-selbst"></span>
+        <div class="bias-name">Curse of Knowledge</div>
+        <div class="bias-cat-label">Selbstwahrnehmung</div>
+        <span class="bias-toggle">+</span>
+        <div class="bias-body">Jemand mit Wissen geht davon aus, dass andere dasselbe Wissen teilen.</div>
+      </div>
+
+      <div class="bias-card" data-cat="selbst">
+        <span class="bias-cat-dot cat-selbst"></span>
+        <div class="bias-name">Self-fulfilling Prophecy</div>
+        <div class="bias-cat-label">Selbstwahrnehmung</div>
+        <span class="bias-toggle">+</span>
+        <div class="bias-body">Eine Erwartung führt dazu, dass sie sich selbst erfüllt — sowohl durch positive als auch negative Affirmation.</div>
+      </div>
+
+      <div class="bias-card" data-cat="selbst">
+        <span class="bias-cat-dot cat-selbst"></span>
+        <div class="bias-name">Übergeneralisierung</div>
+        <div class="bias-cat-label">Selbstwahrnehmung</div>
+        <span class="bias-toggle">+</span>
+        <div class="bias-body">Aus einem einzigen Ereignis wird eine allgemeine Regel abgeleitet — „Ich bin einmal gescheitert, also werde ich immer scheitern".</div>
+      </div>
+
+      <!-- SOZIALE PHÄNOMENE -->
+      <div class="bias-card" data-cat="sozial">
+        <span class="bias-cat-dot cat-sozial"></span>
+        <div class="bias-name">Köhler-Effekt</div>
+        <div class="bias-cat-label">Soziale Phänomene</div>
+        <span class="bias-toggle">+</span>
+        <div class="bias-body">Schwächere Gruppenmitglieder strengen sich mehr an als stärkere, wenn ihre Leistung für den Gruppenerfolg entscheidend ist.</div>
+      </div>
+
+      <div class="bias-card" data-cat="sozial">
+        <span class="bias-cat-dot cat-sozial"></span>
+        <div class="bias-name">Streisand-Effekt</div>
+        <div class="bias-cat-label">Soziale Phänomene</div>
+        <span class="bias-toggle">+</span>
+        <div class="bias-body">Der Versuch, Informationen zu unterdrücken, führt dazu, dass sie noch stärker verbreitet werden.</div>
+      </div>
+
+      <div class="bias-card" data-cat="sozial">
+        <span class="bias-cat-dot cat-sozial"></span>
+        <div class="bias-name">Bystander-Effekt</div>
+        <div class="bias-cat-label">Soziale Phänomene</div>
+        <span class="bias-toggle">+</span>
+        <div class="bias-body">Je mehr Menschen anwesend sind, desto geringer ist die Wahrscheinlichkeit, dass jemand hilft. Enthält zwei Fehler: Verantwortungsdiffusion (= ich muss nichts machen, weil andere auch nichts machen) und den Beurteilungsfehler.</div>
+      </div>
+
+      <div class="bias-card" data-cat="sozial">
+        <span class="bias-cat-dot cat-sozial"></span>
+        <div class="bias-name">Ingroup Bias</div>
+        <div class="bias-cat-label">Soziale Phänomene</div>
+        <span class="bias-toggle">+</span>
+        <div class="bias-body">Man bevorzugt Mitglieder der eigenen Gruppe gegenüber Außenstehenden.</div>
+      </div>
+
+      <div class="bias-card" data-cat="sozial">
+        <span class="bias-cat-dot cat-sozial"></span>
+        <div class="bias-name">Matthäus-Effekt</div>
+        <div class="bias-cat-label">Soziale Phänomene</div>
+        <span class="bias-toggle">+</span>
+        <div class="bias-body">„Wer hat, dem wird gegeben": Anfangsvorteile verstärken sich im Laufe der Zeit — wer mehr hat, bekommt mehr, und wer weniger hat, bekommt auch weniger.</div>
+      </div>
+
+      <div class="bias-card" data-cat="sozial">
+        <span class="bias-cat-dot cat-sozial"></span>
+        <div class="bias-name">Peter-Prinzip</div>
+        <div class="bias-cat-label">Soziale Phänomene</div>
+        <span class="bias-toggle">+</span>
+        <div class="bias-body">In Hierarchien werden Menschen so lange befördert, bis sie eine Position erreichen, der sie nicht mehr gewachsen sind — „Menschen werden so lange befördert, bis sie ihre Stufe der Inkompetenz erreicht haben".</div>
+      </div>
+
+      <!-- ENTSCHEIDUNG & URTEIL -->
+      <div class="bias-card" data-cat="entsch">
+        <span class="bias-cat-dot cat-entsch"></span>
+        <div class="bias-name">Prospect Theorie</div>
+        <div class="bias-cat-label">Entscheidung &amp; Urteil</div>
+        <span class="bias-toggle">+</span>
+        <div class="bias-body">Menschen bewerten Gewinne und Verluste nicht objektiv: Verluste schmerzen stärker als gleichwertige Gewinne Freude machen.</div>
+      </div>
+
+      <div class="bias-card" data-cat="entsch">
+        <span class="bias-cat-dot cat-entsch"></span>
+        <div class="bias-name">Anchoring-Effekt</div>
+        <div class="bias-cat-label">Entscheidung &amp; Urteil</div>
+        <span class="bias-toggle">+</span>
+        <div class="bias-body">Menschen orientieren sich stark an der ersten verfügbaren Zahl oder Information („Anker"), selbst wenn sie irrelevant ist — z.&nbsp;B. wirkt ein durchgestrichener höherer Preis daneben günstiger, auch wenn sich der eigentliche Preis nicht verändert hat.</div>
+      </div>
+
+      <div class="bias-card" data-cat="entsch">
+        <span class="bias-cat-dot cat-entsch"></span>
+        <div class="bias-name">Framing</div>
+        <div class="bias-cat-label">Entscheidung &amp; Urteil</div>
+        <span class="bias-toggle">+</span>
+        <div class="bias-body">Die Art der Darstellung beeinflusst Entscheidungen stark — „90&nbsp;% fettfrei" wirkt besser als „10&nbsp;% Fett", obwohl es dasselbe ist.</div>
+      </div>
+
+      <div class="bias-card" data-cat="entsch">
+        <span class="bias-cat-dot cat-entsch"></span>
+        <div class="bias-name">Status-quo-Bias</div>
+        <div class="bias-cat-label">Entscheidung &amp; Urteil</div>
+        <span class="bias-toggle">+</span>
+        <div class="bias-body">Die Tendenz, den aktuellen Zustand zu bevorzugen und Veränderungen zu vermeiden.</div>
+      </div>
+
+      <div class="bias-card" data-cat="entsch">
+        <span class="bias-cat-dot cat-entsch"></span>
+        <div class="bias-name">Sunken-Cost-Fallacy</div>
+        <div class="bias-cat-label">Entscheidung &amp; Urteil</div>
+        <span class="bias-toggle">+</span>
+        <div class="bias-body">Die Tendenz, an etwas festzuhalten, weil man schon viel investiert hat, obwohl ein Abbruch die bessere Option wäre.</div>
+      </div>
+
+      <div class="bias-card" data-cat="entsch">
+        <span class="bias-cat-dot cat-entsch"></span>
+        <div class="bias-name">Verfügbarkeits- <br>heuristik <br></div>
+        <div class="bias-cat-label">Entscheidung &amp; Urteil</div>
+        <span class="bias-toggle">+</span>
+        <div class="bias-body">Menschen bemessen Wahrscheinlichkeiten daran, wie schnell ihnen Beispiele dazu einfallen.</div>
+      </div>
+
+      <div class="bias-card" data-cat="entsch">
+        <span class="bias-cat-dot cat-entsch"></span>
+        <div class="bias-name">Endowment-Effekt</div>
+        <div class="bias-cat-label">Entscheidung &amp; Urteil</div>
+        <span class="bias-toggle">+</span>
+        <div class="bias-body">Man bewertet Dinge höher, nur weil man sie besitzt.</div>
+      </div>
+
+      <div class="bias-card" data-cat="entsch">
+        <span class="bias-cat-dot cat-entsch"></span>
+        <div class="bias-name">IKEA-Effekt</div>
+        <div class="bias-cat-label">Entscheidung &amp; Urteil</div>
+        <span class="bias-toggle">+</span>
+        <div class="bias-body">Menschen bewerten Dinge höher, die sie selbst (mit)gebaut haben.</div>
+      </div>
+
+      <!-- KOGNITION & WAHRNEHMUNG -->
+      <div class="bias-card" data-cat="kognit">
+        <span class="bias-cat-dot cat-kognit"></span>
+        <div class="bias-name">Confirmation Bias</div>
+        <div class="bias-cat-label">Kognition &amp; Wahrnehmung</div>
+        <span class="bias-toggle">+</span>
+        <div class="bias-body">Man sucht, interpretiert und erinnert Informationen so, dass sie die eigenen Überzeugungen bestätigen.</div>
+      </div>
+
+      <div class="bias-card" data-cat="kognit">
+        <span class="bias-cat-dot cat-kognit"></span>
+        <div class="bias-name">Kognitive Dissonanz</div>
+        <div class="bias-cat-label">Kognition &amp; Wahrnehmung</div>
+        <span class="bias-toggle">+</span>
+        <div class="bias-body">Unangenehmes Gefühl, wenn Verhalten und Überzeugungen nicht zusammenpassen — z.&nbsp;B. rauchen, obwohl man weiß, dass es ungesund ist.</div>
+      </div>
+
+      <div class="bias-card" data-cat="kognit">
+        <span class="bias-cat-dot cat-kognit"></span>
+        <div class="bias-name">Halo-Effekt</div>
+        <div class="bias-cat-label">Kognition &amp; Wahrnehmung</div>
+        <span class="bias-toggle">+</span>
+        <div class="bias-body">Ein einzelnes positives Merkmal (z.&nbsp;B. Attraktivität) beeinflusst die Gesamtbeurteilung einer Person positiv.</div>
+      </div>
+
+      <div class="bias-card" data-cat="kognit">
+        <span class="bias-cat-dot cat-kognit"></span>
+        <div class="bias-name">Horn-Effekt</div>
+        <div class="bias-cat-label">Kognition &amp; Wahrnehmung</div>
+        <span class="bias-toggle">+</span>
+        <div class="bias-body">Das Gegenteil des Halo-Effekts: Ein negatives Merkmal beeinflusst die gesamte Wahrnehmung einer Person negativ.</div>
+      </div>
+
+      <div class="bias-card" data-cat="kognit">
+        <span class="bias-cat-dot cat-kognit"></span>
+        <div class="bias-name">Priming</div>
+        <div class="bias-cat-label">Kognition &amp; Wahrnehmung</div>
+        <span class="bias-toggle">+</span>
+        <div class="bias-body">Vorherige Reize beeinflussen unbewusst Wahrnehmung und Verhalten.</div>
+      </div>
+
+      <div class="bias-card" data-cat="kognit">
+        <span class="bias-cat-dot cat-kognit"></span>
+        <div class="bias-name">Illusorische Korrelation</div>
+        <div class="bias-cat-label">Kognition &amp; Wahrnehmung</div>
+        <span class="bias-toggle">+</span>
+        <div class="bias-body">Man glaubt, dass etwas zusammenhängt, obwohl es nicht so ist — z.&nbsp;B. man schreibt eine gute Note, weil man mit seinem „Glücksstift" geschrieben hat.</div>
+      </div>
+
+      <div class="bias-card" data-cat="kognit">
+        <span class="bias-cat-dot cat-kognit"></span>
+        <div class="bias-name">Illusorische Wahrheit</div>
+        <div class="bias-cat-label">Kognition &amp; Wahrnehmung</div>
+        <span class="bias-toggle">+</span>
+        <div class="bias-body">Man gewinnt Glaubwürdigkeit durch das Wiederholen einer Aussage — je öfter etwas gesagt wird, desto wahrer wirkt es.</div>
+      </div>
+
+      <div class="bias-card" data-cat="kognit">
+        <span class="bias-cat-dot cat-kognit"></span>
+        <div class="bias-name">Barnum-Effekt</div>
+        <div class="bias-cat-label">Kognition &amp; Wahrnehmung</div>
+        <span class="bias-toggle">+</span>
+        <div class="bias-body">Vage, allgemeine Aussagen werden auf einen selbst bezogen — z.&nbsp;B. bei Horoskopen.</div>
+      </div>
+
+      <!-- SONSTIGE -->
+      <div class="bias-card" data-cat="sonstig">
+        <span class="bias-cat-dot cat-sonstig"></span>
+        <div class="bias-name">Hindsight Bias</div>
+        <div class="bias-cat-label">Sonstige</div>
+        <span class="bias-toggle">+</span>
+        <div class="bias-body">Nach einem Ereignis glaubt man, man hätte es „schon immer gewusst" — „im Nachhinein ist man immer schlauer".</div>
+      </div>
+
+      <div class="bias-card" data-cat="sonstig">
+        <span class="bias-cat-dot cat-sonstig"></span>
+        <div class="bias-name">Automation Bias</div>
+        <div class="bias-cat-label">Sonstige</div>
+        <span class="bias-toggle">+</span>
+        <div class="bias-body">Menschen verlassen sich zu stark auf automatisierte Systeme, auch wenn diese Fehler machen.</div>
+      </div>
+
+      <div class="bias-card" data-cat="sonstig">
+        <span class="bias-cat-dot cat-sonstig"></span>
+        <div class="bias-name">Survivorship Bias</div>
+        <div class="bias-cat-label">Sonstige</div>
+        <span class="bias-toggle">+</span>
+        <div class="bias-body">Man sieht nur die „Überlebenden" und ignoriert die vielen, die gescheitert sind — dadurch entsteht ein verzerrtes Bild. Der Fehler liegt daran, dass nur aus Erfolgen gelernt wird und kein richtiger Verbesserungsprozess stattfinden kann.</div>
+      </div>
+
+      <div class="bias-card" data-cat="sonstig">
+        <span class="bias-cat-dot cat-sonstig"></span>
+        <div class="bias-name">Rubber-Duck-Effekt</div>
+        <div class="bias-cat-label">Sonstige</div>
+        <span class="bias-toggle">+</span>
+        <div class="bias-body">Durch lautes Erklären eines Problems (z.&nbsp;B. einem „Gummientchen") findet man oft selbst die Lösung.</div>
+      </div>
+
+      <div class="bias-card" data-cat="sonstig">
+        <span class="bias-cat-dot cat-sonstig"></span>
+        <div class="bias-name">Placebo-Effekt</div>
+        <div class="bias-cat-label">Sonstige</div>
+        <span class="bias-toggle">+</span>
+        <div class="bias-body">Eine positive Erwartung führt zu einer tatsächlichen Verbesserung, obwohl die Behandlung keinen Wirkstoff enthält — vgl. Medikamente ohne Wirkstoffe.</div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<footer class="site-footer" style="margin-top:5rem;">
+  <div class="footer-name">Ogulcan <span>Kaya</span></div>
+  <div class="footer-right">Media HAK Schwaz<br>Kommunikations- &amp; Medienportfolio</div>
+</footer>
+
 <script src="../js/main.js"></script>
+<script>
+  document.getElementById('nav-toggle').addEventListener('click',function(){
+    document.getElementById('nav-menu').classList.toggle('open');
+  });
+
+  // Filter
+  var filterBtns = document.querySelectorAll('.filter-btn');
+  var biasCards = document.querySelectorAll('.bias-card');
+  var biasCount = document.getElementById('bias-count');
+
+  filterBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var cat = btn.dataset.cat;
+      filterBtns.forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      var visible = 0;
+      biasCards.forEach(function(card){
+        if(cat === 'all' || card.dataset.cat === cat){
+          card.classList.remove('hidden');
+          visible++;
+        } else {
+          card.classList.add('hidden');
+          card.classList.remove('open');
+        }
+      });
+      biasCount.innerHTML = '<strong>' + visible + '</strong> Biases werden angezeigt';
+    });
+  });
+
+  // Expand / collapse
+  biasCards.forEach(function(card){
+    card.addEventListener('click', function(){
+      card.classList.toggle('open');
+    });
+  });
+</script>
 </body>
 </html>

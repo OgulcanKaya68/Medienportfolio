@@ -3,24 +3,304 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WOP | Ogulcan Kaya</title>
+  <title>Entscheidungsfindung | WOP 3. Klasse | Ogulcan Kaya</title>
+  <link rel="icon" type="image/jpeg" href="../assets/kaya.jpg" />
   <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .projekt-page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: calc(var(--nav-h) + 4rem) var(--pad-x) 6rem;
+    }
+
+    .proj-back {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em;
+      color: var(--muted); margin-bottom: 2.5rem; text-decoration: none;
+      transition: color 0.2s;
+    }
+    .proj-back:hover { color: var(--orange); }
+
+    .proj-meta { display: flex; gap: 0.75rem; margin-bottom: 1rem; flex-wrap: wrap; }
+    .proj-meta span {
+      font-family: var(--mono); font-size: 0.6rem;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 0.2rem 0.6rem; border: 1px solid var(--border);
+    }
+    .meta-fach { color: var(--orange); border-color: rgba(249,115,22,0.3); background: rgba(249,115,22,0.05); }
+    .meta-kl   { color: var(--blue-light); border-color: rgba(59,130,246,0.3); background: rgba(59,130,246,0.05); }
+    .meta-tool { color: var(--muted); }
+
+    .proj-titel {
+      font-family: var(--display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800; line-height: 1.05;
+      color: var(--dark); margin-bottom: 0.6rem;
+    }
+    .proj-untertitel {
+      font-family: var(--mono); font-size: 0.82rem;
+      line-height: 1.8; color: #666; margin-bottom: 3rem;
+    }
+    .proj-divider { border: none; border-top: 1px solid var(--border); margin: 0 0 3rem; }
+
+    .lf-section {
+      margin-bottom: 3.5rem;
+      padding-bottom: 3.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .lf-section:last-child { border-bottom: none; margin-bottom: 0; }
+
+    .lf-num {
+      font-family: var(--mono); font-size: 0.6rem;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--orange); margin-bottom: 0.4rem;
+    }
+    .lf-section h2 {
+      font-family: var(--display); font-size: 1.4rem;
+      font-weight: 800; color: var(--dark); margin-bottom: 1.25rem;
+    }
+    .lf-section p {
+      font-family: var(--mono); font-size: 0.8rem;
+      line-height: 1.9; color: #444;
+    }
+    .lf-section p + p { margin-top: 0.85rem; }
+
+    .aufgabe-img {
+      width: 100%; border: 1px solid var(--border);
+      margin-top: 1.5rem; display: block;
+    }
+
+    .komp-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem; }
+    .komp-list li {
+      font-family: var(--mono); font-size: 0.8rem;
+      line-height: 1.7; color: #444;
+      padding-left: 1.2rem; position: relative;
+    }
+    .komp-list li::before { content: '→'; position: absolute; left: 0; color: var(--orange); }
+
+    .kriterien-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .kriterium {
+      border: 1px solid var(--border);
+      background: var(--cream);
+      padding: 1.25rem 1.5rem;
+    }
+    .kriterium-num {
+      font-family: var(--mono); font-size: 0.58rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--orange); margin-bottom: 0.4rem;
+    }
+    .kriterium-title {
+      font-family: var(--display); font-size: 0.95rem;
+      font-weight: 800; color: var(--dark); margin-bottom: 0.4rem;
+    }
+    .kriterium-desc {
+      font-family: var(--mono); font-size: 0.7rem;
+      line-height: 1.65; color: #666;
+    }
+
+    /* Slider */
+    .slider {
+      position: relative;
+      margin-top: 1.5rem;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      background: #f5f5f0;
+    }
+    .slider-track {
+      display: flex;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .slider-track img {
+      min-width: 100%;
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .slider-btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,0.92); border: 1px solid var(--border);
+      width: 2.2rem; height: 2.2rem;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 1rem; color: var(--dark);
+      transition: background 0.2s;
+      z-index: 2;
+    }
+    .slider-btn:hover { background: #fff; }
+    .slider-btn.prev { left: 0.75rem; }
+    .slider-btn.next { right: 0.75rem; }
+    .slider-counter {
+      position: absolute; bottom: 0.75rem; left: 50%; transform: translateX(-50%);
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em;
+      background: rgba(255,255,255,0.88); padding: 0.2rem 0.6rem;
+      border: 1px solid var(--border); color: var(--dark);
+    }
+
+    @media (max-width: 600px) {
+      .kriterien-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-<div class="bg-grid"></div>
-<div class="bg-glow-blue"></div>
-<main>
-  <div class="page-header">
-    <span class="tag">Fachbereich</span>
-    <h1>W<span class="gradient-text">OP</span></h1>
-    <p>Wirtschaft, Organisation &amp; Psychologie – 3., 4. und 5. Klasse.</p>
+
+<nav class="site-nav" id="site-nav">
+  <a href="../index.html" class="nav-logo">ogulcan.<span>kaya</span></a>
+  <ul class="nav-menu" id="nav-menu">
+    <li class="nav-item"><a href="../index.html" class="nav-link">Start</a></li>
+    <li class="nav-item has-sub">
+      <a href="../koea/index.html" class="nav-link">KOEA</a>
+      <div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="../koea/koea-4-personas.html">4. Klasse</a><a href="../koea/koea-5-tyrolit.html">5. Klasse</a></div>
+    </li>
+    <li class="nav-item has-sub">
+      <a href="../minf/index.html" class="nav-link">MINF</a>
+      <div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="../minf/1-klasse.html">1. Klasse</a><a href="../minf/2-klasse.html">2. Klasse</a><a href="../minf/3-klasse.html">3. Klasse</a><a href="../minf/4-klasse.html">4. Klasse</a></div>
+    </li>
+    <li class="nav-item has-sub">
+      <a href="../imsk/index.html" class="nav-link">IMSK</a>
+      <div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="../imsk/imsk-2-website.html">2. Klasse</a><a href="../imsk/3-klasse.html">3. Klasse</a></div>
+    </li>
+    <li class="nav-item has-sub">
+      <a href="../wop/index.html" class="nav-link active">WOP</a>
+      <div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="../wop/3-klasse.html">3. Klasse</a><a href="../wop/4-klasse.html">4. Klasse</a><a href="../wop/5-klasse.html">5. Klasse</a></div>
+    </li>
+    <li class="nav-item has-sub">
+      <a href="../ntma/index.html" class="nav-link">NTMA</a>
+      <div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="../ntma/3-klasse.html">3. Klasse</a><a href="../ntma/4-klasse.html">4. Klasse</a></div>
+    </li>
+    <li class="nav-item"><a href="../lebenslauf.html" class="nav-link">Lebenslauf</a></li>
+    <li class="nav-item"><a href="../ueber-mich.html" class="nav-link">Über mich</a></li>
+    <li class="nav-item"><a href="../kontakt.html" class="nav-link">Kontakt</a></li>
+  </ul>
+  <button class="nav-toggle" id="nav-toggle"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="projekt-page">
+
+  <a href="../wop/index.html" class="proj-back">← Zurück zu WOP</a>
+
+  <div class="proj-meta">
+    <span class="meta-fach">WOP</span>
+    <span class="meta-kl">3. Klasse</span>
+    <span class="meta-tool">Entscheidungstheorie</span>
   </div>
-  <div class="cards-grid">
-    <!-- Projektkarten hier einfügen -->
+
+  <h1 class="proj-titel">Entscheidungs&shy;findung</h1>
+  <p class="proj-untertitel">
+    Analyse von Entscheidungsprozessen im wirtschaftlichen und persönlichen Kontext —
+    Methoden, Kriterien und Bewertungsverfahren für rationale Entscheidungen.
+  </p>
+
+  <hr class="proj-divider" />
+
+  <!-- 1. LERNSITUATION -->
+  <div class="lf-section">
+    <div class="lf-num">01 · Leitfaden</div>
+    <h2>Lernsituation</h2>
+    <p>
+      Im WOP-Unterricht beschäftigten wir uns mit dem Thema Entscheidungsfindung —
+      einem zentralen Bereich der Wirtschaftspsychologie. Ausgangspunkt war die Frage,
+      wie Menschen und Unternehmen bei mehreren Alternativen zu einer rationalen,
+      nachvollziehbaren Entscheidung gelangen.
+    </p>
+    <p>
+      Wir analysierten verschiedene Entscheidungssituationen, erarbeiteten Kriterien
+      zur Bewertung von Alternativen und wendeten strukturierte Methoden wie die
+      Nutzwertanalyse oder Pro-Kontra-Listen an, um Entscheidungen transparent
+      und begründbar zu machen.
+    </p>
   </div>
-</main>
-<div id="site-footer"></div>
-<script src="../js/nav.js"></script>
+
+  <!-- 2. METHODEN -->
+  <div class="lf-section">
+    <div class="lf-num">02 · Leitfaden</div>
+    <h2>Methoden & Instrumente</h2>
+
+    <div class="kriterien-grid">
+      <div class="kriterium">
+        <div class="kriterium-num">Methode 01</div>
+        <div class="kriterium-title">Pro-Kontra-Liste</div>
+        <div class="kriterium-desc">Gegenüberstellung von Vor- und Nachteilen einer Entscheidungsalternative.</div>
+      </div>
+      <div class="kriterium">
+        <div class="kriterium-num">Methode 02</div>
+        <div class="kriterium-title">Nutzwertanalyse</div>
+        <div class="kriterium-desc">Bewertung von Alternativen anhand gewichteter Kriterien — ermöglicht einen objektiven Vergleich.</div>
+      </div>
+      <div class="kriterium">
+        <div class="kriterium-num">Methode 03</div>
+        <div class="kriterium-title">Entscheidungsbaum</div>
+        <div class="kriterium-desc">Visualisierung von Entscheidungswegen und deren möglichen Konsequenzen.</div>
+      </div>
+      <div class="kriterium">
+        <div class="kriterium-num">Methode 04</div>
+        <div class="kriterium-title">Kriterienmatrix</div>
+        <div class="kriterium-desc">Systematische Gegenüberstellung mehrerer Optionen nach definierten Bewertungskriterien.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. KOMPETENZEN -->
+  <div class="lf-section">
+    <div class="lf-num">03 · Leitfaden</div>
+    <h2>Kompetenzen</h2>
+    <ul class="komp-list">
+      <li>Entscheidungstheorie: Rationale vs. intuitive Entscheidungsprozesse unterscheiden</li>
+      <li>Kriteriendefinition: Relevante Bewertungsmaßstäbe für Alternativen erarbeiten</li>
+      <li>Nutzwertanalyse: Gewichtung und Punktevergabe zur objektiven Bewertung anwenden</li>
+      <li>Visualisierung: Entscheidungsprozesse strukturiert darstellen</li>
+      <li>Reflexion: Eigene Entscheidungsmuster erkennen und hinterfragen</li>
+    </ul>
+  </div>
+
+  <!-- 4. ERGEBNIS -->
+  <div class="lf-section">
+    <div class="lf-num">04 · Leitfaden</div>
+    <h2>Ergebnis</h2>
+    <p>
+      Das erarbeitete Dokument zeigt eine strukturierte Auseinandersetzung mit
+      Entscheidungssituationen — von der Problemdefinition über die Bewertung
+      der Alternativen bis zur begründeten Entscheidung.
+    </p>
+
+    <div class="slider" id="ergebnis-slider">
+      <div class="slider-track" id="slider-track">
+        <img src="../assets/wop-3-seite1.png" alt="Ergebnis Seite 1 – Entscheidungsfindung WOP 3. Klasse" />
+        <img src="../assets/wop-3-seite2.png" alt="Ergebnis Seite 2 – Entscheidungsfindung WOP 3. Klasse" />
+      </div>
+      <button class="slider-btn prev" id="slider-prev">&#8592;</button>
+      <button class="slider-btn next" id="slider-next">&#8594;</button>
+      <div class="slider-counter" id="slider-counter">1 / 2</div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <div class="footer-name">Ogulcan <span>Kaya</span></div>
+  <div class="footer-right">Media HAK Schwaz<br>Kommunikations- &amp; Medienportfolio</div>
+</footer>
+
 <script src="../js/main.js"></script>
+<script>
+  document.getElementById('nav-toggle').addEventListener('click',function(){document.getElementById('nav-menu').classList.toggle('open');});
+
+  (function(){
+    var track = document.getElementById('slider-track');
+    var counter = document.getElementById('slider-counter');
+    var total = track.children.length;
+    var cur = 0;
+    function go(n){
+      cur = (n + total) % total;
+      track.style.transform = 'translateX(-' + (cur * 100) + '%)';
+      counter.textContent = (cur + 1) + ' / ' + total;
+    }
+    document.getElementById('slider-prev').addEventListener('click', function(){ go(cur - 1); });
+    document.getElementById('slider-next').addEventListener('click', function(){ go(cur + 1); });
+  })();
+</script>
 </body>
 </html>
