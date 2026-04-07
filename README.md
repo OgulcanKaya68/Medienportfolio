@@ -7,7 +7,7 @@ Die Website dokumentiert Projekte und Kompetenzen aus fünf Fachbereichen über 
 ## Fachbereiche
 
 - **KOEA** — Kommunikation & Öffentlichkeitsarbeit (4.–5. Klasse)
-- **MINF** — Medieninformatik (1.–4. Klasse)
+- **MINF** — Medieninformatik (1.–3. Klasse)
 - **IMSK** — Informationsmanagement & Medientechnik (2.–3. Klasse)
 - **WOP** — Wirtschafts- & Organisationspsychologie (3.–5. Klasse)
 - **NTMA** — Netzwerkmanagement (3.–4. Klasse)
