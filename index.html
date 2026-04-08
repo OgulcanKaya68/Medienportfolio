@@ -116,6 +116,11 @@
       .two-col { grid-template-columns: 1fr; gap: 3rem; }
       .diploma-section { grid-template-columns: 1fr; padding: 2.5rem 1.5rem; }
       .diploma-cta { align-items: flex-start; }
+      /* Foto auf Mobile: sichtbar, kompakt oben */
+      .hero { grid-template-columns: 1fr; grid-template-rows: auto auto; padding-top: calc(var(--nav-h) + 2rem); gap: 2rem; }
+      .hero-right { display: flex !important; justify-content: center; order: -1; }
+      .profile-card { width: 160px; }
+      .profile-photo { height: 200px; }
     }
   </style>
 </head>
@@ -131,7 +136,7 @@
     </li>
     <li class="nav-item has-sub">
       <a href="minf/index.html" class="nav-link">MINF</a>
-      <div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="minf/1-klasse.html">1. Klasse</a><a href="minf/2-klasse.html">2. Klasse</a><a href="minf/3-klasse.html">3. Klasse</a>
+      <div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="minf/1-klasse.html">1. Klasse</a><a href="minf/2-klasse.html">2. Klasse</a><a href="minf/3-klasse.html">3. Klasse</a></div>
     </li>
     <li class="nav-item has-sub">
       <a href="imsk/index.html" class="nav-link">IMSK</a>
