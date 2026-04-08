@@ -8,11 +8,8 @@
   <link rel="stylesheet" href="../css/style.css" />
   <style>
     .projekt-page {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: calc(var(--nav-h) + 4rem) 2rem 6rem;
+      padding: calc(var(--nav-h) + 4rem) var(--pad-x) 6rem;
     }
-
     /* Back */
     .proj-back {
       display: inline-flex; align-items: center; gap: 0.4rem;
@@ -21,7 +18,6 @@
       transition: color 0.2s;
     }
     .proj-back:hover { color: var(--orange); }
-
     /* Meta */
     .proj-meta { display: flex; gap: 0.75rem; margin-bottom: 1rem; flex-wrap: wrap; }
     .proj-meta span {
@@ -32,7 +28,6 @@
     .meta-fach { color: var(--orange); border-color: rgba(249,115,22,0.3); background: rgba(249,115,22,0.05); }
     .meta-kl   { color: var(--blue-light); border-color: rgba(59,130,246,0.3); background: rgba(59,130,246,0.05); }
     .meta-tool { color: var(--muted); }
-
     /* Titel */
     .proj-titel {
       font-family: var(--display);
@@ -45,7 +40,6 @@
       line-height: 1.8; color: #666; margin-bottom: 3rem;
     }
     .proj-divider { border: none; border-top: 1px solid var(--border); margin: 0 0 3rem; }
-
     /* Leitfaden Sektionen */
     .lf-section {
       margin-bottom: 3.5rem;
@@ -53,7 +47,6 @@
       border-bottom: 1px solid var(--border);
     }
     .lf-section:last-child { border-bottom: none; margin-bottom: 0; }
-
     .lf-num {
       font-family: var(--mono); font-size: 0.6rem;
       letter-spacing: 0.22em; text-transform: uppercase;
@@ -68,13 +61,11 @@
       line-height: 1.9; color: #444;
     }
     .lf-section p + p { margin-top: 0.85rem; }
-
     /* Aufgabe Screenshot */
     .aufgabe-img {
       width: 100%; border: 1px solid var(--border);
       margin-top: 1.5rem; display: block;
     }
-
     /* Kompetenzen Liste */
     .komp-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem; }
     .komp-list li {
@@ -83,7 +74,6 @@
       padding-left: 1.2rem; position: relative;
     }
     .komp-list li::before { content: '→'; position: absolute; left: 0; color: var(--orange); }
-
     /* Ergebnis — Personas Grid */
     .personas-grid {
       display: grid;
@@ -91,13 +81,11 @@
       gap: 1.5rem;
       margin-top: 1.5rem;
     }
-
     .persona-card {
       border: 1px solid var(--border);
       background: var(--cream);
       overflow: hidden;
     }
-
     .persona-header {
       background: var(--dark);
       padding: 1.25rem 1.5rem;
@@ -115,7 +103,6 @@
       font-family: var(--mono); font-size: 0.65rem;
       color: rgba(255,255,255,0.45); letter-spacing: 0.08em;
     }
-
     .persona-body { padding: 1.25rem 1.5rem; }
     .persona-row {
       display: flex; justify-content: space-between;
@@ -125,7 +112,6 @@
     .persona-row:last-child { border-bottom: none; }
     .persona-row-label { color: var(--muted); }
     .persona-row-val { color: var(--dark); font-weight: 500; text-align: right; max-width: 60%; }
-
     .persona-quote {
       margin-top: 1rem;
       padding: 0.9rem 1rem;
@@ -134,7 +120,6 @@
       font-family: var(--mono); font-size: 0.7rem;
       font-style: italic; line-height: 1.65; color: #555;
     }
-
     /* PDF Embed — sauber ohne Browser-Controls */
     .pdf-grid {
       display: grid;
@@ -175,14 +160,12 @@
       color: #fff; background: rgba(0,0,0,0.6);
       padding: 0.4rem 1rem; backdrop-filter: blur(4px);
     }
-
     @media (max-width: 700px) {
       .personas-grid, .pdf-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-
 <nav class="site-nav" id="site-nav">
   <a href="../startseite.html" class="nav-logo">ogulcan.<span>kaya</span></a>
   <ul class="nav-menu" id="nav-menu">
@@ -213,11 +196,8 @@
   </ul>
   <button class="nav-toggle" id="nav-toggle"><span></span><span></span><span></span></button>
 </nav>
-
 <div class="projekt-page">
-
   <a href="../koea/4-klasse.html" class="proj-back">← Zurück zu KOEA 4. Klasse</a>
-
   <div class="proj-meta">
     <span class="meta-fach">KOEA</span>
     <span class="meta-kl">4. Klasse</span>
@@ -225,15 +205,12 @@
     <span class="meta-tool">Adobe Firefly</span>
     <span class="meta-tool">Teamarbeit</span>
   </div>
-
   <h1 class="proj-titel">Personas entwickeln<br>für TikTok</h1>
   <p class="proj-untertitel">
     Zielgruppenanalyse und Erstellung von zwei detaillierten Personas im 2er-Team —
     gestaltet als InDesign-Steckbriefe mit KI-generierten Fotos.
   </p>
-
   <hr class="proj-divider" />
-
   <!-- 1. LERNSITUATION -->
   <div class="lf-section">
     <div class="lf-num">01 · Leitfaden</div>
@@ -252,7 +229,6 @@
     </p>
     <img src="../assets/koea-4-aufgabe.png" alt="Aufgabenstellung – Personas TikTok" class="aufgabe-img" />
   </div>
-
   <!-- 2. KOMPETENZEN -->
   <div class="lf-section">
     <div class="lf-num">02 · Leitfaden</div>
@@ -266,7 +242,6 @@
       <li>Präsentationskompetenz: Vorstellung der Ergebnisse vor der Klasse</li>
     </ul>
   </div>
-
   <!-- 3. UMSETZUNG -->
   <div class="lf-section">
     <div class="lf-num">03 · Leitfaden</div>
@@ -282,10 +257,8 @@
       KI wurde ausschließlich für die Bildgenerierung eingesetzt — Konzept,
       Text und Layout entstanden eigenständig im Team.
     </p>
-
     <!-- Personas Übersicht -->
     <div class="personas-grid">
-
       <div class="persona-card">
         <div class="persona-header">
           <span class="persona-platform">TikTok · Weiblich</span>
@@ -314,7 +287,6 @@
           </div>
         </div>
       </div>
-
       <div class="persona-card">
         <div class="persona-header">
           <span class="persona-platform">TikTok · Männlich</span>
@@ -343,34 +315,24 @@
           </div>
         </div>
       </div>
-
     </div>
-
     <!-- PDFs -->
     <div class="pdf-grid" style="margin-top:2.5rem;">
-
       <div class="pdf-block">
         <span class="pdf-label">Steckbrief — Tina Tessa</span>
         <img src="../assets/koea-4-steckbrief-tina.png" alt="Steckbrief Tina Tessa" class="aufgabe-img" />
       </div>
-
       <div class="pdf-block">
         <span class="pdf-label">Steckbrief — Tristan Tate</span>
         <img src="../assets/koea-4-steckbrief-tristan.png" alt="Steckbrief Tristan Tate" class="aufgabe-img" />
       </div>
-
     </div>
-
   </div>
-
 </div>
-
 <footer class="site-footer">
   <div class="footer-name">Ogulcan <span>Kaya</span></div>
   <div class="footer-right">Media HAK Schwaz<br>Kommunikations- &amp; Medienportfolio</div>
 </footer>
-
 <script src="../js/main.js"></script>
-
 </body>
 </html>
