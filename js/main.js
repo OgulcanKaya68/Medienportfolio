@@ -5,15 +5,21 @@
 document.addEventListener('DOMContentLoaded', function () {
 
   /* ── Mobile Navigation ─────────────────────── */
-  // HINWEIS: Das Öffnen/Schließen des Hamburger-Menüs
-  // ist in jedem HTML via inline-script geregelt.
-  // Hier nur: Accordion für Submenüs + Close-on-outside.
+  var navToggle = document.getElementById('nav-toggle');
+  var navMenu   = document.getElementById('nav-menu');
+
+  // Hamburger öffnen/schließen (stopPropagation verhindert sofortiges Schließen)
+  if (navToggle && navMenu) {
+    navToggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      navMenu.classList.toggle('open');
+    });
+  }
 
   // Menü schließen wenn außerhalb geklickt
   document.addEventListener('click', function (e) {
     if (!e.target.closest('.site-nav')) {
-      const menu = document.getElementById('nav-menu');
-      if (menu) menu.classList.remove('open');
+      if (navMenu) navMenu.classList.remove('open');
       document.querySelectorAll('.nav-item.has-sub.sub-open')
         .forEach(function (el) { el.classList.remove('sub-open'); });
     }
@@ -24,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
     link.addEventListener('click', function (e) {
       if (window.innerWidth <= 960) {
         e.preventDefault();
+        e.stopPropagation();
         this.parentElement.classList.toggle('sub-open');
       }
     });

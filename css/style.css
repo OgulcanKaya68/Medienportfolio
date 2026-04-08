@@ -25,6 +25,12 @@
 
   --nav-h:  64px;
   --pad-x:  3rem;
+  /* iOS Safari: Menühöhe mit 100vh als Fallback */
+  --menu-h: calc(100vh - var(--nav-h));
+}
+/* Moderne Browser: 100dvh reagiert auf URL-Bar-Änderungen */
+@supports (height: 100dvh) {
+  :root { --menu-h: calc(100dvh - var(--nav-h)); }
 }
 
 /* ── Reset ────────────────────────────────────── */
@@ -149,7 +155,11 @@ ul { list-style: none; }
   cursor: pointer;
   background: none;
   border: none;
-  padding: 4px;
+  padding: 10px;
+  min-width: 44px;
+  min-height: 44px;
+  justify-content: center;
+  align-items: center;
 }
 .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--dark); border-radius: 2px; }
 
@@ -268,9 +278,10 @@ ul { list-style: none; }
   border-bottom: 3px solid var(--blue); border-left: 3px solid var(--blue);
 }
 .card-label {
-  position: absolute; bottom: -2rem; right: 0;
+  position: absolute; bottom: -2.5rem; right: 0;
   font-family: var(--mono); font-size: 0.62rem;
   letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase;
+  z-index: 2;
 }
 
 /* ══════════════════════════════════════════════
@@ -623,12 +634,17 @@ ul { list-style: none; }
   .nav-toggle { display: flex; }
   .nav-menu.open {
     display: flex; flex-direction: column;
-    position: fixed; top: var(--nav-h); left: 0; right: 0; bottom: 0;
+    position: fixed;
+    top: var(--nav-h); left: 0; right: 0;
+    height: var(--menu-h);
     background: var(--cream);
     border-top: 2px solid var(--orange);
-    padding: 1.25rem 1.5rem 2rem;
+    padding: 1.25rem 1.5rem;
+    padding-bottom: max(2rem, env(safe-area-inset-bottom, 0px));
     align-items: flex-start; gap: 0;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    z-index: 999;
   }
   /* Nav-Items auf Mobile */
   .nav-menu.open .nav-item { width: 100%; border-bottom: 1px solid var(--border); }
@@ -640,15 +656,23 @@ ul { list-style: none; }
     display: flex; justify-content: space-between; align-items: center;
   }
   .nav-menu.open .nav-link:hover, .nav-menu.open .nav-link.active { color: var(--orange); }
-  /* Dropdown — Accordion-Verhalten auf Mobile */
+  /* Dropdown — Accordion mit max-height (iOS Safari sicher) */
   .nav-dropdown {
-    position: static; opacity: 1; visibility: visible;
+    position: static;
     transform: none; pointer-events: all;
     background: none; border: none;
-    padding: 0 0 0.5rem 0.75rem; min-width: auto; border-top: none;
-    display: none;
+    padding: 0 0 0 0.75rem; min-width: auto; border-top: none;
+    /* max-height statt display:none — verhindert iOS-Rendering-Bug */
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 1; visibility: visible;
+    transition: max-height 0.25s ease, padding 0.25s ease;
   }
-  .nav-item.has-sub.sub-open > .nav-dropdown { display: block; }
+  .nav-item.has-sub.sub-open > .nav-dropdown {
+    max-height: 400px;
+    padding-bottom: 0.5rem;
+  }
   /* Kontrast: heller Hintergrund → dunkle Schrift, große Touch-Targets */
   .nav-dropdown a {
     color: var(--dark); opacity: 0.7;
@@ -668,6 +692,36 @@ ul { list-style: none; }
   .tab-btn { font-size: 0.65rem; padding: 0.45rem 0.9rem; }
   .lf-grid { grid-template-columns: 1fr !important; }
   .kriterien-grid, .screenshot-grid { grid-template-columns: 1fr !important; }
+}
+
+/* ── Tablet (max-width: 768px) ── */
+@media (max-width: 768px) {
+  .profile-card { width: 140px; }
+  .two-col { grid-template-columns: 1fr; gap: 2.5rem; }
+  .stats-row { flex-wrap: wrap; }
+  .stat { flex: 1 1 45%; }
+  .diploma-section { grid-template-columns: 1fr !important; padding: 2rem 1.25rem; }
+  .diploma-cta { align-items: flex-start; }
+  .fach-row-name { display: none; }
+  .projekt-wrapper { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .cards-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Kleine Phones (max-width: 480px) ── */
+@media (max-width: 480px) {
+  :root { --pad-x: 1rem; --nav-h: 56px; }
+  .profile-card { width: 120px; }
+  .profile-photo { height: 160px; }
+  .stat { flex: 1 1 100%; border-right: none; border-bottom: 1px solid var(--border); }
+  .stat:last-child { border-bottom: none; }
+  .hero-cta { flex-direction: column; }
+  .hero-cta .btn { width: 100%; justify-content: center; }
+  .tabs-bar { padding: 0 var(--pad-x); margin-left: 0; margin-right: 0; }
+  .cards-grid { margin: 0; padding: 0 var(--pad-x); background: none; gap: 1rem; }
+  .proj-card { outline: 1px solid var(--border); }
+  .leitfaden-section h2 { font-size: 1.2rem; }
+  .fach-hero { padding-left: var(--pad-x); padding-right: var(--pad-x); }
+  .section-title { font-size: 1.8rem; }
 }
 
 /* ══════════════════════════════════════════════
