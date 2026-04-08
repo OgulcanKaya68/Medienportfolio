@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Persönliche Website | IMSK 2. Klasse | Ogulcan Kaya</title>
+  <title>Pressemitteilung TYROLIT | KOEA 5. Klasse | Ogulcan Kaya</title>
   <link rel="icon" type="image/jpeg" href="../assets/kaya.jpg" />
   <link rel="stylesheet" href="../css/style.css" />
   <style>
@@ -69,7 +69,7 @@
     }
     .lf-section p + p { margin-top: 0.85rem; }
 
-    /* Aufgabe / Ergebnis Screenshot */
+    /* Aufgabe Screenshot */
     .aufgabe-img {
       width: 100%; border: 1px solid var(--border);
       margin-top: 1.5rem; display: block;
@@ -84,52 +84,39 @@
     }
     .komp-list li::before { content: '→'; position: absolute; left: 0; color: var(--orange); }
 
-    /* Bewertungskriterien */
-    .kriterien-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-      margin-top: 1.5rem;
+    /* PDF Embed */
+    .pdf-block { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1.5rem; }
+    .pdf-label {
+      font-family: var(--mono); font-size: 0.62rem;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
     }
-    .kriterium {
+    .pdf-frame-wrap {
       border: 1px solid var(--border);
-      background: var(--cream);
-      padding: 1.25rem 1.5rem;
+      background: #f5f5f5;
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 210 / 297;
     }
-    .kriterium-num {
-      font-family: var(--mono); font-size: 0.58rem;
-      letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--orange); margin-bottom: 0.4rem;
+    .pdf-frame-wrap iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: none;
     }
-    .kriterium-title {
-      font-family: var(--display); font-size: 0.95rem;
-      font-weight: 800; color: var(--dark); margin-bottom: 0.4rem;
+    .pdf-overlay-link {
+      position: absolute; inset: 0; z-index: 2;
+      display: flex; align-items: flex-end; justify-content: center;
+      padding-bottom: 1.2rem;
+      background: linear-gradient(to bottom, transparent 70%, rgba(0,0,0,0.45));
+      opacity: 0; transition: opacity 0.3s;
+      cursor: pointer; text-decoration: none;
     }
-    .kriterium-desc {
-      font-family: var(--mono); font-size: 0.7rem;
-      line-height: 1.65; color: #666;
-    }
-
-    /* Code-Preview */
-    .code-preview {
-      background: #1a1a1a;
-      border: 1px solid var(--border);
-      padding: 1.5rem;
-      margin-top: 1.5rem;
-      overflow-x: auto;
-    }
-    .code-preview pre {
-      font-family: var(--mono); font-size: 0.72rem;
-      line-height: 1.7; color: #ccc;
-      margin: 0; white-space: pre;
-    }
-    .code-tag { color: #7dd3fc; }
-    .code-attr { color: #fca5a5; }
-    .code-val  { color: #86efac; }
-    .code-comment { color: #555; }
-
-    @media (max-width: 600px) {
-      .kriterien-grid { grid-template-columns: 1fr; }
+    .pdf-overlay-link:hover { opacity: 1; }
+    .pdf-overlay-link span {
+      font-family: var(--mono); font-size: 0.65rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: #fff; background: rgba(0,0,0,0.6);
+      padding: 0.4rem 1rem; backdrop-filter: blur(4px);
     }
   </style>
 </head>
@@ -140,16 +127,16 @@
   <ul class="nav-menu" id="nav-menu">
     <li class="nav-item"><a href="../index.html" class="nav-link">Start</a></li>
     <li class="nav-item has-sub">
-      <a href="../koea/index.html" class="nav-link">KOEA</a>
-      <div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="../koea/koea-4-personas.html">4. Klasse</a><a href="../koea/koea-5-tyrolit.html">5. Klasse</a></div>
+      <a href="../koea/index.html" class="nav-link active">KOEA</a>
+      <div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="../koea/4-klasse.html">4. Klasse</a><a href="../koea/5-klasse.html">5. Klasse</a></div>
     </li>
     <li class="nav-item has-sub">
       <a href="../minf/index.html" class="nav-link">MINF</a>
       <div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="../minf/1-klasse.html">1. Klasse</a><a href="../minf/2-klasse.html">2. Klasse</a><a href="../minf/3-klasse.html">3. Klasse</a></div>
     </li>
     <li class="nav-item has-sub">
-      <a href="../imsk/index.html" class="nav-link active">IMSK</a>
-      <div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="../imsk/imsk-2-website.html">2. Klasse</a><a href="../imsk/3-klasse.html">3. Klasse</a></div>
+      <a href="../imsk/index.html" class="nav-link">IMSK</a>
+      <div class="nav-dropdown"><div class="dropdown-label">Klassen</div><a href="../imsk/2-klasse.html">2. Klasse</a><a href="../imsk/3-klasse.html">3. Klasse</a></div>
     </li>
     <li class="nav-item has-sub">
       <a href="../wop/index.html" class="nav-link">WOP</a>
@@ -168,19 +155,20 @@
 
 <div class="projekt-page">
 
-  <a href="../imsk/index.html" class="proj-back">← Zurück zu IMSK</a>
+  <a href="../koea/index.html" class="proj-back">← Zurück zu KOEA</a>
 
   <div class="proj-meta">
-    <span class="meta-fach">IMSK</span>
-    <span class="meta-kl">2. Klasse</span>
-    <span class="meta-tool">HTML</span>
-    <span class="meta-tool">CSS</span>
+    <span class="meta-fach">KOEA</span>
+    <span class="meta-kl">5. Klasse</span>
+    <span class="meta-tool">Pressemitteilung</span>
+    <span class="meta-tool">KI-Unterstützung</span>
+    <span class="meta-tool">Canva</span>
   </div>
 
-  <h1 class="proj-titel">Persönliche Website<br>erstellen</h1>
+  <h1 class="proj-titel">Pressemitteilung<br>TYROLIT AG</h1>
   <p class="proj-untertitel">
-    Erstellung einer persönlichen Website mit mehreren Unterseiten, funktionierendem Menü
-    und eingebundenen Bildern — reines HTML &amp; CSS ohne Frameworks.
+    Erstellung einer Pressemitteilung über die Eröffnung einer neuen energieeffizienten
+    Produktionslinie bei TYROLIT AG in Schwaz — mit KI-Unterstützung und passender Gestaltung.
   </p>
 
   <hr class="proj-divider" />
@@ -190,74 +178,56 @@
     <div class="lf-num">01 · Leitfaden</div>
     <h2>Lernsituation</h2>
     <p>
-      Im Rahmen des Unterrichts in IMSK (Informationsmanagement &amp; Schriftverkehr) erhielten
-      wir den Auftrag, eine persönliche Website laut einer vorgegebenen Word-Datei zu erstellen.
-      Die Website sollte mehrere Seiten umfassen, ein funktionierendes Menü auf allen Seiten haben
-      und mit eigenen Bildern gestaltet sein.
+      Im Rahmen des Unterrichts in KOEA (Kommunikation &amp; Öffentlichkeitsarbeit) erhielten
+      wir den Auftrag, uns für ein Tiroler Unternehmen zu entscheiden und eine Pressemitteilung
+      über ein selbst gewähltes Ereignis zu verfassen. Ich entschied mich für die
+      <strong>TYROLIT AG</strong> mit Sitz in Schwaz — ein international tätiges Unternehmen
+      der Swarovski-Gruppe, das Präzisionsschleifwerkzeuge herstellt.
     </p>
     <p>
-      Beurteilt wurden vier Aspekte: das Design, die Bildqualität, der Inhalt sowie die
-      korrekte Funktionsweise des Menüs. Als Abgabe wurde der gesamte Webauftritts-Ordner
-      als ZIP-Datei eingereicht.
+      Zunächst wurde eine kurze Unternehmensbeschreibung durch Recherche auf der Homepage
+      erarbeitet und in OneNote festgehalten. Anschließend wurde das Thema der Pressemitteilung
+      gewählt und nach den Kriterien für die Wahrscheinlichkeit einer Veröffentlichung begründet.
+      KI wurde zur Unterstützung beim Verfassen genutzt — alle verwendeten Prompts wurden
+      ebenfalls in OneNote dokumentiert.
     </p>
+    <img src="../assets/koea-5-aufgabe.png" alt="Aufgabenstellung – Pressemitteilung 5. Klasse" class="aufgabe-img" />
   </div>
 
-  <!-- 2. BEWERTUNGSKRITERIEN -->
+  <!-- 2. KOMPETENZEN -->
   <div class="lf-section">
     <div class="lf-num">02 · Leitfaden</div>
-    <h2>Bewertungskriterien</h2>
-
-    <div class="kriterien-grid">
-      <div class="kriterium">
-        <div class="kriterium-num">Kriterium 01</div>
-        <div class="kriterium-title">Schönheit des Designs</div>
-        <div class="kriterium-desc">Passen die Farben zusammen? Stimmen Abstände und Breiten?</div>
-      </div>
-      <div class="kriterium">
-        <div class="kriterium-num">Kriterium 02</div>
-        <div class="kriterium-title">Bilder</div>
-        <div class="kriterium-desc">Sind die Bilder webgeeignet? Stimmt die Größe und Auflösung?</div>
-      </div>
-      <div class="kriterium">
-        <div class="kriterium-num">Kriterium 03</div>
-        <div class="kriterium-title">Inhalt</div>
-        <div class="kriterium-desc">Sinnvoller und relevanter Inhalt auf allen Seiten.</div>
-      </div>
-      <div class="kriterium">
-        <div class="kriterium-num">Kriterium 04</div>
-        <div class="kriterium-title">Menü-Funktionalität</div>
-        <div class="kriterium-desc">Funktionierendes Navigationsmenü auf allen Unterseiten.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 3. KOMPETENZEN -->
-  <div class="lf-section">
-    <div class="lf-num">03 · Leitfaden</div>
     <h2>Kompetenzen</h2>
     <ul class="komp-list">
-      <li>HTML-Grundstruktur: DOCTYPE, Head, Body, semantische Tags</li>
-      <li>CSS-Styling: Farben, Abstände, Breiten und Layout mit eigener Stylesheet-Datei</li>
-      <li>Verlinkung: Mehrere Unterseiten mit funktionierendem Navigationsmenü</li>
-      <li>Bildeinbindung: Webgeeignete Bilder mit korrekter Pfadangabe</li>
-      <li>Dateistruktur: Ordnerstruktur für einen Webauftritt (HTML, CSS, Bilder)</li>
+      <li>Unternehmensrecherche: Selbstständige Recherche und Zusammenfassung von Unternehmensinformationen</li>
+      <li>Pressemitteilung: Kenntnis des Aufbaus und der Sprache einer professionellen Pressemitteilung</li>
+      <li>Themenauswahl: Begründete Auswahl eines Ereignisses nach Kriterien der Veröffentlichungswahrscheinlichkeit</li>
+      <li>KI-Einsatz: Sinnvoller und reflektierter Einsatz von KI als Schreibhilfe mit Prompt-Dokumentation</li>
+      <li>Gestaltung: Anpassung einer Mustervorlage an das Corporate Design des gewählten Unternehmens</li>
     </ul>
   </div>
 
-  <!-- 4. ERGEBNIS -->
+  <!-- 3. UMSETZUNG -->
   <div class="lf-section">
-    <div class="lf-num">04 · Leitfaden</div>
-    <h2>Ergebnis</h2>
+    <div class="lf-num">03 · Leitfaden</div>
+    <h2>Umsetzung</h2>
     <p>
-      Die Website besteht aus einer Startseite mit Header-Bild, Navigationsmenü
-      und Portrait-Foto sowie weiteren Unterseiten (Über mich, MINF, IMSK).
-      Das Menü ist auf allen Seiten eingebunden und verlinkt korrekt zu den
-      jeweiligen Unterseiten.
+      Als Thema für die Pressemitteilung wurde die Eröffnung einer neuen energieeffizienten
+      Produktionslinie am Standort Schwaz gewählt. Dieses Ereignis erfüllt mehrere
+      Veröffentlichungskriterien: regionale Relevanz, wirtschaftliche Bedeutung,
+      Nachhaltigkeitsbezug und öffentliches Interesse an Technologieinvestitionen.
+    </p>
+    <p>
+      Der Text wurde mit Unterstützung von KI verfasst — die Prompts wurden dokumentiert.
+      Das Design der Pressemitteilung orientiert sich am Corporate Design von TYROLIT
+      (Blau-Weiß, klare Typografie) und wurde auf Basis einer Mustervorlage in Canva erstellt.
     </p>
 
-    <img src="../assets/imsk-2-website.png" alt="Ergebnis – Persönliche Website IMSK 2. Klasse" class="aufgabe-img" />
-
-    <img src="../assets/imsk-2-code-screenshot.jpg" alt="Screenshot – Persönliche Website IMSK 2. Klasse" class="aufgabe-img" style="margin-top:2rem;" />
+    <!-- PDF -->
+    <div class="pdf-block">
+      <span class="pdf-label">Pressemitteilung — TYROLIT AG</span>
+      <img src="../assets/koea-5-tyrolit.png" alt="Pressemitteilung TYROLIT AG" class="aufgabe-img" />
+    </div>
 
   </div>
 
