@@ -817,31 +817,31 @@ ul { list-style: none; }
 }
 .lightbox-close:hover { color: #fff; }
 
-/* ── Große Bildschirme — Inhalt auf max. ~1520px zentrieren ── */
+/* ── Große Bildschirme — Inhalt auf max. ~1800px zentrieren ── */
 /* Prinzip: --pad-x wächst dynamisch, sodass der Inhaltsbereich
-   nie breiter als ~1520px wird. Hintergründe füllen weiter
+   nie breiter als ~1800px wird. Hintergründe füllen weiter
    die volle Breite (z.B. dunkle cv-section). */
 @media (min-width: 1520px) {
   :root {
-    --pad-x: max(3rem, calc((100vw - 1520px) / 2));
+    --pad-x: max(3rem, calc((100vw - 1800px) / 2));
   }
   /* cards-grid und tabs-bar nutzen margin statt padding → anpassen */
   .cards-grid {
     margin-left: auto; margin-right: auto;
-    max-width: 1520px;
+    max-width: 1800px;
     padding: 0 var(--pad-x);
   }
   .tabs-bar {
     margin-left: auto; margin-right: auto;
-    max-width: 1520px;
+    max-width: 1800px;
     padding: 0 var(--pad-x);
   }
   .stats-row {
-    max-width: 1520px;
+    max-width: 1800px;
     margin-left: auto; margin-right: auto;
   }
   .site-footer {
-    max-width: 1520px;
+    max-width: 1800px;
     margin-left: auto; margin-right: auto;
   }
 }
