@@ -8,7 +8,7 @@
 
   /* ── Navigationsstruktur ───────────────────── */
   const NAV = [
-    { label: 'Start',       href: 'index.html',        root: true },
+    { label: 'Start',       href: 'startseite.html',        root: true },
     {
       label: 'KOEA',
       sub: [
@@ -79,7 +79,7 @@
           `<a href="${resolveHref(s.href)}">${s.label}</a>`
         ).join('');
         return `<li class="nav-item has-sub">
-          <a href="${resolveHref(item.label.toLowerCase() + '/index.html')}" class="nav-link">
+          <a href="${resolveHref(item.label.toLowerCase() + '/' + item.label.toLowerCase() + '.html')}" class="nav-link">
             ${item.label}${chevron}
           </a>
           <div class="nav-dropdown">${drops}</div>
@@ -92,7 +92,7 @@
 
     return `
     <nav class="site-nav" id="site-nav">
-      <a href="${resolveHref('index.html')}" class="nav-logo">KAYA</a>
+      <a href="${resolveHref('startseite.html')}" class="nav-logo">KAYA</a>
       <ul class="nav-menu" id="nav-menu">${items}</ul>
       <button class="nav-toggle" id="nav-toggle" aria-label="Menü öffnen">
         <span></span><span></span><span></span>
