@@ -149,7 +149,19 @@
       link.addEventListener('click', function (e) {
         if (window.innerWidth <= 960) {
           e.preventDefault();
-          this.parentElement.classList.toggle('sub-open');
+          e.stopPropagation();
+          var parent = this.parentElement;
+          var wasOpen = parent.classList.contains('sub-open');
+          
+          // Alle anderen Submenus schließen
+          document.querySelectorAll('.nav-item.has-sub').forEach(function (item) {
+            item.classList.remove('sub-open');
+          });
+          
+          // Das geklickte Submenu öffnen wenn es vorher geschlossen war
+          if (!wasOpen) {
+            parent.classList.add('sub-open');
+          }
         }
       });
     });

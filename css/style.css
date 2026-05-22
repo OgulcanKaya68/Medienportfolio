@@ -673,6 +673,10 @@ ul { list-style: none; }
     max-height: 400px;
     padding-bottom: 0.5rem;
   }
+  /* Desktop-Hover-Verschiebung auf Mobile verhindern */
+  .nav-item:hover > .nav-dropdown {
+    transform: none;
+  }
   /* Kontrast: heller Hintergrund → dunkle Schrift, große Touch-Targets */
   .nav-dropdown a {
     color: var(--dark); opacity: 0.7;

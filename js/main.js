@@ -31,7 +31,18 @@ document.addEventListener('DOMContentLoaded', function () {
       if (window.innerWidth <= 960) {
         e.preventDefault();
         e.stopPropagation();
-        this.parentElement.classList.toggle('sub-open');
+        var parent = this.parentElement;
+        var wasOpen = parent.classList.contains('sub-open');
+        
+        // Alle anderen Submenus schließen
+        document.querySelectorAll('.nav-item.has-sub').forEach(function (item) {
+          item.classList.remove('sub-open');
+        });
+        
+        // Das geklickte Submenu öffnen wenn es vorher geschlossen war
+        if (!wasOpen) {
+          parent.classList.add('sub-open');
+        }
       }
     });
   });
