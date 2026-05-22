@@ -95,9 +95,12 @@ ul { list-style: none; }
   text-decoration: none;
   transition: color 0.2s;
 }
-.nav-link:hover,
-.nav-item:hover > .nav-link,
 .nav-link.active { color: var(--dark); }
+
+@media (hover: hover) {
+  .nav-link:hover,
+  .nav-item:hover > .nav-link { color: var(--dark); }
+}
 .has-sub > .nav-link::after { content: ' ⌄'; font-size: 0.6rem; opacity: 0.5; }
 
 /* Dropdown — dark, orange top border */
@@ -122,10 +125,12 @@ ul { list-style: none; }
   top: -14px; left: 0; right: 0;
   height: 14px;
 }
-.nav-item:hover > .nav-dropdown {
-  opacity: 1; visibility: visible;
-  transform: translateX(-50%) translateY(0);
-  pointer-events: all;
+@media (hover: hover) {
+  .nav-item:hover > .nav-dropdown {
+    opacity: 1; visibility: visible;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: all;
+  }
 }
 .nav-dropdown .dropdown-label {
   font-family: var(--mono);
@@ -146,7 +151,9 @@ ul { list-style: none; }
   color: rgba(255,255,255,0.55);
   transition: color 0.15s, background 0.15s;
 }
-.nav-dropdown a:hover { color: var(--orange); background: rgba(255,255,255,0.04); }
+@media (hover: hover) {
+  .nav-dropdown a:hover { color: var(--orange); background: rgba(255,255,255,0.04); }
+}
 
 .nav-toggle {
   display: none;
@@ -655,27 +662,24 @@ ul { list-style: none; }
     width: 100%;
     display: flex; justify-content: space-between; align-items: center;
   }
-  .nav-menu.open .nav-link:hover, .nav-menu.open .nav-link.active { color: var(--orange); }
+  .nav-menu.open .nav-link.active,
+  .nav-menu.open .nav-link:active { color: var(--orange); }
   /* Dropdown — Accordion mit max-height (iOS Safari sicher) */
   .nav-dropdown {
     position: static;
-    transform: none; pointer-events: all;
+    transform: none; pointer-events: auto !important;
     background: none; border: none;
     padding: 0 0 0 0.75rem; min-width: auto; border-top: none;
     /* max-height statt display:none — verhindert iOS-Rendering-Bug */
     display: block;
     max-height: 0;
     overflow: hidden;
-    opacity: 1; visibility: visible;
+    opacity: 1 !important; visibility: visible !important;
     transition: max-height 0.25s ease, padding 0.25s ease;
   }
   .nav-item.has-sub.sub-open > .nav-dropdown {
     max-height: 400px;
     padding-bottom: 0.5rem;
-  }
-  /* Desktop-Hover-Verschiebung auf Mobile verhindern */
-  .nav-item:hover > .nav-dropdown {
-    transform: none;
   }
   /* Kontrast: heller Hintergrund → dunkle Schrift, große Touch-Targets */
   .nav-dropdown a {
