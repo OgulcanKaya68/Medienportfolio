@@ -25,24 +25,20 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // Submenu Accordion (nur Mobile)
+  // Submenu Accordion (Mobile + Desktop)
   document.querySelectorAll('.nav-item.has-sub > .nav-link').forEach(function (link) {
     link.addEventListener('click', function (e) {
-      if (window.innerWidth <= 960) {
-        e.preventDefault();
-        e.stopPropagation();
-        var parent = this.parentElement;
-        var wasOpen = parent.classList.contains('sub-open');
-        
-        // Alle anderen Submenus schließen
-        document.querySelectorAll('.nav-item.has-sub').forEach(function (item) {
-          item.classList.remove('sub-open');
-        });
-        
-        // Das geklickte Submenu öffnen wenn es vorher geschlossen war
-        if (!wasOpen) {
-          parent.classList.add('sub-open');
-        }
+      e.preventDefault();
+      e.stopPropagation();
+      var parent = this.parentElement;
+      var wasOpen = parent.classList.contains('sub-open');
+
+      document.querySelectorAll('.nav-item.has-sub').forEach(function (item) {
+        item.classList.remove('sub-open');
+      });
+
+      if (!wasOpen) {
+        parent.classList.add('sub-open');
       }
     });
   });
@@ -106,33 +102,83 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   })();
 
-  /* ── Typewriter Effekt ─────────────────────── */
-  var twEl = document.getElementById('tw-text');
-  if (twEl) {
-    var phrases = [
-      'Angehender Software Developer.',
-      'Medieninformatik & Netzwerktechnik.',
-      'Leidenschaftlich für sauberen Code.',
-      'Auf der Suche nach meinem ersten Job.',
+  /* ── Hybrid Typing Effect ──────────────────── */
+  (function() {
+    const PHRASES = [
+      'Softwareentwickler.',
+      'KI-Entwickler.',
+      'Maturant der BHAK Schwaz.',
+      'Webentwickler aus Tirol.',
     ];
-    var pi = 0, ci = 0, deleting = false;
 
-    function tick() {
-      var phrase = phrases[pi];
-      if (deleting) {
-        ci--;
-        twEl.textContent = phrase.slice(0, ci);
-        if (ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; setTimeout(tick, 400); return; }
-        setTimeout(tick, 38);
-      } else {
-        ci++;
-        twEl.textContent = phrase.slice(0, ci);
-        if (ci === phrase.length) { deleting = true; setTimeout(tick, 2400); return; }
-        setTimeout(tick, 62);
-      }
+    const textEl = document.getElementById('tw-text');
+    const cursor = document.querySelector('.tw-cursor');
+    if (!textEl) return;
+
+    let pi = 0;
+
+    function setActive(on) {
+      if (on) textEl.classList.add('tw-active');
+      else textEl.classList.remove('tw-active');
     }
-    setTimeout(tick, 900);
-  }
+
+    // Phase 1: typewriter for first phrase only
+    function typePhrase(phrase, done) {
+      let i = 0;
+      if (cursor) cursor.style.opacity = '1';
+      setActive(true);
+
+      function tick() {
+        i++;
+        // Build HTML: all previous letters as plain spans, last letter with animation class
+        let html = '';
+        for (let j = 0; j < i; j++) {
+          const ch = phrase[j] === ' ' ? '&nbsp;' : phrase[j];
+          const cls = (j === i - 1) ? 'tw-letter tw-letter-new' : 'tw-letter';
+          html += `<span class="${cls}">${ch}</span>`;
+        }
+        textEl.innerHTML = html;
+
+        if (i < phrase.length) {
+          setTimeout(tick, 50);
+        } else {
+          textEl.classList.add('tw-underline');
+          if (cursor) cursor.style.opacity = '0';
+          setTimeout(done, 1400);
+        }
+      }
+      tick();
+    }
+
+    // Phase 2: slide+blur for all subsequent phrases
+    function transitionTo(phrase, done) {
+      textEl.classList.remove('tw-underline');
+      textEl.classList.add('tw-slide-out');
+      if (cursor) cursor.style.opacity = '0';
+
+      setTimeout(() => {
+        textEl.classList.remove('tw-slide-out');
+        textEl.innerHTML = '';
+        textEl.textContent = phrase;
+        setActive(true);
+        textEl.classList.add('tw-slide-in');
+
+        setTimeout(() => {
+          textEl.classList.remove('tw-slide-in');
+          textEl.classList.add('tw-underline');
+          setTimeout(done, 1700);
+        }, 320);
+      }, 220);
+    }
+
+    function next() {
+      pi = (pi + 1) % PHRASES.length;
+      transitionTo(PHRASES[pi], next);
+    }
+
+    // Start
+    setTimeout(() => typePhrase(PHRASES[0], next), 600);
+  })();
 
   /* ── Tabs System ───────────────────────────── */
   var tabBtns = document.querySelectorAll('.tab-btn');
