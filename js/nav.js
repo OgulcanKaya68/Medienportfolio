@@ -105,7 +105,7 @@
     return `
     <footer class="site-footer">
       <span class="footer-logo">KAYA</span>
-      <p class="footer-copy">© 2025 Ogulcan Kaya · Media HAK Schwaz</p>
+      <p class="footer-copy">© 2026 Ogulcan Kaya · Maturant HAK Schwaz · Student HOK</p>
       <div class="footer-links">
         <a href="${resolveHref('lebenslauf.html')}">Lebenslauf</a>
         <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>

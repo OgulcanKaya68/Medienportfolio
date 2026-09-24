@@ -22,4 +22,4 @@ Statische Website — kein Framework, kein CMS.
 ## Autor
 
 **Ogulcan Kaya**
-Schüler, BHAK/BHAS Schwaz — Medieninformatik, 5. Jahrgang
+Maturant der BHAK Schwaz (Medieninformatik, 2026) · Student Coding & Digital Design, Hochschule Kufstein Tirol (HOK)
