@@ -17,7 +17,7 @@ Die Website dokumentiert Projekte und Kompetenzen aus fünf Fachbereichen über 
 Statische Website — kein Framework, kein CMS.
 
 - HTML, CSS, JavaScript
-- Gehostet über Plesk (Schulserver)
+- Gehostet über Plesk (Schulserver), automatisches Deployment bei jedem Push auf `main` per GitHub-Webhook
 
 ## Autor
 
